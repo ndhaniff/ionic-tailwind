@@ -29,3 +29,6 @@ npm-debug.log*
 /platforms
 /plugins
 /www
+/src/styles/tailwind/base.css
+/src/styles/tailwind/components.css
+/src/styles/tailwind/utilities.css

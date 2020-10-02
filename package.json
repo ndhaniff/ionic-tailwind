@@ -5,11 +5,16 @@
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "npm run tailwind && ionic serve --no-open --lab --external",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "tailwind": "yarn tw:base && yarn tw:utilities && yarn tw:components",
+    "tailwind:prod": "PURGE_TW=true yarn tailwind",
+    "tw:base": "ngtw b -c ng-tailwind/ng-tailwind.base.js",
+    "tw:utilities": "ngtw b -c ng-tailwind/ng-tailwind.utilities.js",
+    "tw:components": "ngtw b -c ng-tailwind/ng-tailwind.components.js"
   },
   "private": true,
   "dependencies": {
@@ -36,6 +41,7 @@
     "@angular/language-service": "~10.0.0",
     "@capacitor/cli": "2.4.2",
     "@ionic/angular-toolkit": "^2.3.0",
+    "@ionic/lab": "3.2.9",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
@@ -48,6 +54,7 @@
     "karma-jasmine": "~3.3.0",
     "karma-jasmine-html-reporter": "^1.5.0",
     "protractor": "~7.0.0",
+    "tailwindcss": "^1.8.10",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
     "typescript": "~3.9.5"
