@@ -1,0 +1,8 @@
+<ion-item class="border-gray-400 border-b" lines="none">
+    <ion-slides class=" max-w-4xl mx-auto" [options]="options">
+        <ion-slide class="w-20 text-center" *ngFor="let item of items; index as i" (click)="selectCategory(i)">
+            <ion-nav-link [ngClass]="{'text-primary': activeSlideIdx === i}" class="text-tiny">{{ item.name }}
+            </ion-nav-link>
+        </ion-slide>
+    </ion-slides>
+</ion-item>

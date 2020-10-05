@@ -1,0 +1,29 @@
+<ion-header mode="ios">
+    <ion-toolbar>
+        <ion-back-button></ion-back-button>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div class="flex flex-col items-between h-full">
+        <div class="brand flex-1 flex items-center justify-center">
+            <h1 class="text-center"><span class="text-2xl text-primary">UM</span><span class="text-xl">mart</span></h1>
+        </div>
+        <form class="p-4 flex-1">
+            <div class="input__wrapper mb-4">
+                <ion-input class=" bg-gray-300" type="email" placeholder="Email"></ion-input>
+            </div>
+            <div class="input__wrapper mb-4">
+                <ion-input class=" bg-gray-300" type="password" placeholder="Password"></ion-input>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+                <ion-button color="default" class="bg-gray-900 rounded">Sign up</ion-button>
+                <ion-button color="primary" (click)="testLogin()">Sign in</ion-button>
+            </div>
+            <div class="text-center mt-4">
+                <div class="text-xs text-primary">Forgot Password?</div>
+            </div>
+        </form>
+    </div>
+</ion-content>

@@ -1,0 +1,67 @@
+<ion-header mode="ios">
+    <ion-toolbar>
+        <ion-title class="text-xl">Edit Profile</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div class="profile-banner p-6 text-center border-b-4 border-gray-300">
+        <ion-avatar class="mx-auto" size="large">
+            <img src="/assets/images/avatar1.jpg" alt="">
+        </ion-avatar>
+
+        <div class="text-center w-2/3 mx-auto">
+            <ion-title>Avatar</ion-title>
+        </div>
+    </div>
+
+    <div class="form">
+        <form>
+            <div class="border-b-4 p-6 border-gray-300 input__wrapper mb-4 ">
+                <ion-input class=" bg-gray-200" type="text" value="John Doe" placeholder="Full Name"></ion-input>
+            </div>
+            <div class="border-b-4 p-6 border-gray-300">
+                <div class="header text-md mb-3">Address</div>
+                <div class="input__wrapper mb-4">
+                    <ion-input class=" bg-gray-200" type="text" value="2233 Jalan Rozhan" placeholder="Address line 1">
+                    </ion-input>
+                </div>
+                <div class="input__wrapper mb-4">
+                    <ion-input class=" bg-gray-200" type="text" value="" placeholder="Address line 2"></ion-input>
+                </div>
+                <div class="input__wrapper mb-4">
+                    <ion-input class=" bg-gray-200" type="text" value="14000" placeholder="Poscode"></ion-input>
+                </div>
+                <div class="input__wrapper mb-4">
+                    <ion-input class=" bg-gray-200" type="text" value="Cherok Tokun" placeholder="City"></ion-input>
+                </div>
+            </div>
+
+            <div class="border-b-4 p-6  border-gray-300">
+                <div class="header text-md flex justify-between mb-3">Shipping Address <span
+                        class="text-tiny text-primary">Same as
+                        Address</span></div>
+                <div class="input__wrapper mb-4">
+                    <ion-input class=" bg-gray-200" type="text" value="2233 Jalan Rozhan" placeholder="Address line 1">
+                    </ion-input>
+                </div>
+                <div class="input__wrapper mb-4">
+                    <ion-input class=" bg-gray-200" type="text" value="" placeholder="Address line 2"></ion-input>
+                </div>
+                <div class="input__wrapper mb-4">
+                    <ion-input class=" bg-gray-200" type="text" value="14000" placeholder="Poscode"></ion-input>
+                </div>
+                <div class="input__wrapper mb-4">
+                    <ion-input class=" bg-gray-200" type="text" value="Cherok Tokun" placeholder="City"></ion-input>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    <ion-fab class="mr-3" vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button color="primary">
+            <ion-icon name="save-outline"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+</ion-content>

@@ -1,0 +1,68 @@
+<ion-content>
+    <div class="bannerbg bg-gray-300">
+        <div class="banner p-4">
+            <div class="wrapper" *ngIf="false; else guest">
+                <div class="mb-4">
+                    <ion-avatar class="mx-auto" size="large">
+                        <ion-img src="assets/images/avatar1.jpg"></ion-img>
+                    </ion-avatar>
+                </div>
+
+                <div class="text-center">
+                    <ion-title>Username</ion-title>
+                    <small>Date Joined: 27/03/2020</small>
+                </div>
+            </div>
+
+            <ng-template #guest>
+                <div class="flex justify-end">
+                    <button class="px-4 py-2 bg-gray-900 mr-3 text-white rounded">Sign up</button>
+                    <button class="px-4 py-2 bg-primary text-white rounded">Sign in</button>
+                </div>
+            </ng-template>
+        </div>
+
+        <ng-template *ngIf="false; else notloggedin">
+            <div class="mt-2 py-2 border-b-4 border-gray-300 bg-white">
+                <ion-item lines="none">
+                    <ion-icon slot="start" name="pricetag-outline"></ion-icon>
+                    <ion-label>My Shop</ion-label>
+                    <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+                </ion-item>
+                <ion-item (click)="goTo('/orders')" lines="none">
+                    <ion-icon slot="start" name="document-attach-outline"></ion-icon>
+                    <ion-label>Orders</ion-label>
+                    <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+                </ion-item>
+                <ion-item (click)="goTo('/sales')" lines="none">
+                    <ion-icon slot="start" name="stats-chart-outline"></ion-icon>
+                    <ion-label>Sales</ion-label>
+                    <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+                </ion-item>
+                <ion-item (click)="goTo('/products')" lines="none">
+                    <ion-icon slot="start" name="cube-outline"></ion-icon>
+                    <ion-label>Product Management</ion-label>
+                    <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+                </ion-item>
+            </div>
+
+            <div class="py-2 bg-white">
+                <ion-item (click)="goTo('/profile')" lines="none">
+                    <ion-icon slot="start" name="person-outline"></ion-icon>
+                    <ion-label>Profile</ion-label>
+                    <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+                </ion-item>
+
+                <ion-item lines="none">
+                    <ion-icon slot="start" name="log-out-outline"></ion-icon>
+                    <ion-label>Sign out</ion-label>
+                </ion-item>
+            </div>
+        </ng-template>
+
+
+        <ng-template #notloggedin>
+
+        </ng-template>
+    </div>
+</ion-content>

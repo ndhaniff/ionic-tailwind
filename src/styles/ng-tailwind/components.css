@@ -1,1 +1,10 @@
 @tailwind components;
+
+ion-header,
+ion-toolbar {
+    border-bottom: none;
+}
+
+.card {
+    @apply max-w-xs rounded text-left overflow-hidden shadow-xs relative;
+}

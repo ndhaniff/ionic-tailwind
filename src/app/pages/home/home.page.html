@@ -1,0 +1,186 @@
+<ion-header mode="ios" [translucent]="false">
+    <ion-toolbar>
+        <ion-title> UM<span class="text-bold text-primary">mart</span> </ion-title>
+        <div slot="end" class="inline-block px-3">
+            <ion-icon (click)="gotoSearch()" name="search-outline"></ion-icon>
+        </div>
+    </ion-toolbar>
+    <app-slidemenu [slideChangeSubject]="slideChange$" [options]="catSliderOpt" [slidecontent]="catSliderContent"
+        [items]="categories">
+    </app-slidemenu>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    <div class="bg-gray-200 px-3 py-2">
+        <ion-slides mode="ios" #homeslider>
+            <ion-slide class="rounded-md overflow-hidden">
+                <img src="assets/images/slide1.jpg" />
+            </ion-slide>
+            <ion-slide class="rounded-md overflow-hidden">
+                <img src="assets/images/slide2.jpg" />
+            </ion-slide>
+            <ion-slide class="rounded-md overflow-hidden">
+                <img src="assets/images/slide3.jpg" />
+            </ion-slide>
+        </ion-slides>
+    </div>
+
+    <div class="wrapper p-3">
+        <div>
+            <ion-slides mode="ios" #catSliderContent (ionSlideDidChange)="contentSlideChange()"
+                [options]="catSliderContentOpt">
+                <ion-slide>
+                    <div class="wrapper">
+                        <div *ngIf="newArrivals.length > 0" class="newarrival">
+                            <div class="my-3">
+                                <div class="w-full flex justify-between items-center">
+                                    <div class="text-lg font-semibold">New Arrivals</div>
+                                    <ion-nav-link class="text-primary text-sm">Show All</ion-nav-link>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <app-productcard (click)="goToProduct(product.id)" *ngFor=" let product of newArrivals"
+                                    [product]="product">
+                                </app-productcard>
+                            </div>
+                        </div>
+
+
+                        <div *ngIf="trending.length > 0" class="trending">
+                            <div class="divider my-6 border-gray-200 border-b-2"></div>
+                            <div class="mb-4">
+                                <div class="w-full flex justify-between items-center">
+                                    <div class="text-lg font-semibold">What's Trending</div>
+                                    <ion-nav-link class="text-primary text-sm">Show All</ion-nav-link>
+                                </div>
+                            </div>
+
+                            <app-producthorizontal *ngFor="let product of trending" [product]="product">
+                            </app-producthorizontal>
+                        </div>
+                    </div>
+                </ion-slide>
+                <ion-slide>
+                    <div class="wrapper">
+                        <div *ngIf="clothing.newarrival.length > 0" class="newarrival">
+                            <div class="my-3">
+                                <div class="w-full flex justify-between items-center">
+                                    <div class="text-lg font-semibold">New Arrivals</div>
+                                    <ion-nav-link class="text-primary text-sm">Show All</ion-nav-link>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <app-productcard *ngFor="let product of clothing.newarrival" [product]="product">
+                                </app-productcard>
+                            </div>
+                        </div>
+
+
+                        <div *ngIf="clothing.trending.length > 0" class="trending">
+                            <div class="divider my-6 border-gray-200 border-b-2"></div>
+                            <div class="mb-4">
+                                <div class="w-full flex justify-between items-center">
+                                    <div class="text-lg font-semibold">What's Trending</div>
+                                    <ion-nav-link class="text-primary text-sm">Show All</ion-nav-link>
+                                </div>
+                            </div>
+
+                            <app-producthorizontal *ngFor="let product of clothing.trending" [product]="product">
+                            </app-producthorizontal>
+                        </div>
+                    </div>
+                </ion-slide>
+                <ion-slide>
+                    <div class="wrapper">
+                        <div *ngIf="shoes.newarrival.length > 0" class="newarrival">
+                            <div class="my-3">
+                                <div class="w-full flex justify-between items-center">
+                                    <div class="text-lg font-semibold">New Arrivals</div>
+                                    <ion-nav-link class="text-primary text-sm">Show All</ion-nav-link>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <app-productcard *ngFor="let product of shoes.newarrival" [product]="product">
+                                </app-productcard>
+                            </div>
+                        </div>
+
+
+                        <div *ngIf="shoes.trending.length > 0" class="trending">
+                            <div class="divider my-6 border-gray-200 border-b-2"></div>
+                            <div class="mb-4">
+                                <div class="w-full flex justify-between items-center">
+                                    <div class="text-lg font-semibold">What's Trending</div>
+                                    <ion-nav-link class="text-primary text-sm">Show All</ion-nav-link>
+                                </div>
+                            </div>
+
+                            <app-producthorizontal *ngFor="let product of shoes.trending" [product]="product">
+                            </app-producthorizontal>
+                        </div>
+                    </div>
+                </ion-slide>
+                <ion-slide>
+                    <div class="wrapper">
+                        <div *ngIf="bag.newarrival.length > 0" class="newarrival">
+                            <div class="my-3">
+                                <div class="w-full flex justify-between items-center">
+                                    <div class="text-lg font-semibold">New Arrivals</div>
+                                    <ion-nav-link class="text-primary text-sm">Show All</ion-nav-link>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <app-productcard *ngFor="let product of bag.newarrival" [product]="product">
+                                </app-productcard>
+                            </div>
+                        </div>
+
+
+                        <div *ngIf="bag.trending.length > 0" class="trending">
+                            <div class="divider my-6 border-gray-200 border-b-2"></div>
+                            <div class="mb-4">
+                                <div class="w-full flex justify-between items-center">
+                                    <div class="text-lg font-semibold">What's Trending</div>
+                                    <ion-nav-link class="text-primary text-sm">Show All</ion-nav-link>
+                                </div>
+                            </div>
+
+                            <app-producthorizontal *ngFor="let product of bag.trending" [product]="product">
+                            </app-producthorizontal>
+                        </div>
+                    </div>
+                </ion-slide>
+                <ion-slide>
+                    <div class="wrapper">
+                        <div *ngIf="watches.newarrival.length > 0" class="newarrival">
+                            <div class="my-3">
+                                <div class="w-full flex justify-between items-center">
+                                    <div class="text-lg font-semibold">New Arrivals</div>
+                                    <ion-nav-link class="text-primary text-sm">Show All</ion-nav-link>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <app-productcard *ngFor="let product of watches.newarrival" [product]="product">
+                                </app-productcard>
+                            </div>
+                        </div>
+
+
+                        <div *ngIf="watches.trending.length > 0" class="trending">
+                            <div class="divider my-6 border-gray-200 border-b-2"></div>
+                            <div class="mb-4">
+                                <div class="w-full flex justify-between items-center">
+                                    <div class="text-lg font-semibold">What's Trending</div>
+                                    <ion-nav-link class="text-primary text-sm">Show All</ion-nav-link>
+                                </div>
+                            </div>
+
+                            <app-producthorizontal *ngFor="let product of watches.trending" [product]="product">
+                            </app-producthorizontal>
+                        </div>
+                    </div>
+                </ion-slide>
+            </ion-slides>
+        </div>
+    </div>
+</ion-content>

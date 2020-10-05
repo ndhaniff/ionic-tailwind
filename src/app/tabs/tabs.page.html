@@ -1,0 +1,29 @@
+<ion-tabs (ionTabsWillChange)="getSelectedTab()">
+    <ion-tab-bar slot="bottom">
+        <ion-tab-button tab="home">
+            <div class="cb__tab__btn">
+                <div class="cb__icon">
+                    <ion-icon size="large" name="grid-outline"></ion-icon>
+                </div>
+                <div class="label">Shop</div>
+            </div>
+        </ion-tab-button>
+        <ion-tab-button tab="cart">
+            <div class="cb__tab__btn">
+                <div class="cb__icon">
+                    <ion-icon size="large" name="cart-outline"></ion-icon>
+                </div>
+                <div class="label">Cart</div>
+            </div>
+        </ion-tab-button>
+
+        <ion-tab-button tab="more">
+            <div class="cb__tab__btn">
+                <div class="cb__icon">
+                    <ion-icon size="large" name="apps-outline"></ion-icon>
+                </div>
+                <div class="label">More</div>
+            </div>
+        </ion-tab-button>
+    </ion-tab-bar>
+</ion-tabs>

@@ -1,0 +1,117 @@
+<ion-header mode="ios" class="fixed top-0 left-0">
+    <ion-toolbar class="no-border">
+        <ion-buttons slot="start">
+            <ion-back-button text=""></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <header>
+        <div class="image overflow-hidden h-64 ">
+            <img class="object-cover" #productimg [src]="product.images[0].src" />
+        </div>
+        <ion-slides *ngIf="product.images.length > 1" class="px-4 py-2" [options]="thumbOption">
+            <ion-slide (click)="selectImage(image.src)" *ngFor="let image of product.images">
+                <img src="{{ image.src }}" alt="">
+            </ion-slide>
+        </ion-slides>
+        <div class="product-props py-3">
+            <ion-item lines="none">
+                <div slot="start" class="avatar flex flex-col items-center">
+                    <ion-avatar>
+                        <ion-img [src]="product.seller.shop.avatar"></ion-img>
+                    </ion-avatar>
+                    <div class="text-tiny">{{ product.seller.shop.name }}</div>
+                </div>
+                <div>
+                    <div class="text-md text-semibold">{{ product.name }}</div>
+                    <div class="text-xs capitalize text-primary">{{ product.category.subcategory }}</div>
+                    <div class="price flex">
+                        <div class="text-md mr-2 text-semibold">RM {{ product.price }}</div>
+                        <div class="text-md text-gray-300 line-through">RM {{ product.sale_price }}</div>
+                    </div>
+                </div>
+            </ion-item>
+        </div>
+    </header>
+    <div class="wrapper bg-gray-100 px-4 py-3">
+        <ion-button class="rounded" color="primary" expand="block">Add to Cart</ion-button>
+    </div>
+
+    <ng-container>
+        <ion-item lines="none" (click)="expandItem(product.desc)">
+            <div class="text-md text-bold">Description</div>
+            <ion-icon slot="end" [name]="product.desc.expanded ? 'chevron-down-outline' : 'chevron-up-outline'">
+            </ion-icon>
+        </ion-item>
+
+        <app-expandable expandHeight="100px" [expanded]="product.desc.expanded">
+            <div class="px-6">
+                {{ product.desc.text }}
+            </div>
+        </app-expandable>
+    </ng-container>
+
+    <div class="divider border-b-2 border-gray-300 my-3 mx-6"></div>
+
+    <ng-container>
+        <ion-item lines="none">
+            <div class="text-md font-semibold">Reviews</div>
+        </ion-item>
+
+        <div class="review-card flex items-center bg-tertiary px-6 py-2 rounded-md mx-6">
+            <div class="font-bold text-light text-6xl mr-2">4.8</div>
+            <div>
+                <div class="text-md text-light text-semibold">92 reviews</div>
+                <app-stars [score]="3.5"></app-stars>
+            </div>
+        </div>
+
+        <div class="review-list my-4 mx-6">
+            <div class="review-item mb-3 relative">
+                <div class="flex flex-between items-start">
+                    <div class="avatar">
+                        <ion-avatar>
+                            <ion-img src="assets/images/avatar1.jpg"></ion-img>
+                        </ion-avatar>
+                    </div>
+                    <div class="flex flex-col content px-3">
+                        <div class="text-md">Mark Zuckerberg</div>
+                        <div class="date text-tiny text-gray-400">12.03.2019 at 09.38</div>
+                        <div class="message text-tiny text-gray-500">
+                            Item sampai koyak. seller teruk gila. bungkus macam celaka xdak bubble wrap
+                        </div>
+                    </div>
+                </div>
+
+                <div class="absolute top-0 right-0">
+                    <app-stars [score]="0.5"></app-stars>
+                </div>
+            </div>
+
+            <div class="review-item mb-3 relative">
+                <div class="flex flex-between items-start">
+                    <div class="avatar">
+                        <ion-avatar>
+                            <ion-img src="assets/images/avatar2.jpg"></ion-img>
+                        </ion-avatar>
+                    </div>
+                    <div class="flex flex-col content px-3">
+                        <div class="text-md">Baby Comel</div>
+                        <div class="date text-tiny text-gray-400">12.03.2019 at 09.38</div>
+                        <div class="message text-tiny text-gray-500">
+                            Barang boek punya 👍👍👍👍👍👍
+                        </div>
+                    </div>
+                </div>
+
+                <div class="absolute top-0 right-0">
+                    <app-stars [score]="4.5"></app-stars>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+
+
+</ion-content>

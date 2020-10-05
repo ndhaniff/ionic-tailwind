@@ -1,0 +1,19 @@
+<div class="card relative" (click)="goToProduct()">
+    <ion-icon mode="ios" size="medium" class="absolute text-gray-400" name="heart-outline"></ion-icon>
+    <img class="w-full h-32 object-cover object-top rounded" [src]="product.images[0].src">
+
+    <div class="card-content p-3">
+        <div class="text-sm">{{ product.name }}</div>
+
+        <p class="text-xs text-primary capitalize ">{{ product.category.subcategory }}</p>
+
+        <div class="grid grid-cols-6 mt-3">
+            <div class="price col-span-3">
+                <div class="text-sm">RM {{ product.price }}</div>
+            </div>
+            <div class="sale-price col-span-3">
+                <div class="text-gray-400 text-sm line-through">RM {{ product.sale_price }}</div>
+            </div>
+        </div>
+    </div>
+</div>

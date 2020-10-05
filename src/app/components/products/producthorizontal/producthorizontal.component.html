@@ -1,0 +1,13 @@
+<ion-item lines="full">
+    <div class="product-image w-16 h-16">
+        <img class="w-full" slot="start" [src]="product.images[0].src" />
+    </div>
+    <div class="content px-3 py-2">
+        <div class="text-sm">{{ product.name }}</div>
+        <div class="text-xs text-primary capitalize ">{{ product.category.subcategory }}</div>
+    </div>
+
+    <div slot="end" class="price text-sm py-1 px-3 bg-tertiary text-white rounded">
+        RM {{ product.price }}
+    </div>
+</ion-item>
