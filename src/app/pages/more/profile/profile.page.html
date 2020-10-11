@@ -4,48 +4,78 @@
             <ion-back-button text=""></ion-back-button>
         </ion-buttons>
         <ion-title class="text-xl">Account</ion-title>
-        <div slot="end" class="px-2">
+        <div (click)="goToEdit()" slot="end" class="px-2">
             <ion-icon name="create-outline"></ion-icon>
         </div>
     </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <div class="profile-banner p-6 text-center border-b-4 border-gray-300">
-        <ion-avatar class="mx-auto" size="large">
-            <img src="/assets/images/avatar1.jpg" alt="">
-        </ion-avatar>
+    <div *ngIf="detail; else placeholder" class="wrapper">
+        <div class="profile-banner p-6 text-center border-b-4 border-gray-300">
+            <ion-avatar class="mx-auto" size="large">
+                <img class="object-cover h-full" [src]="avatar ? avatar : '/assets/images/avatar.png'" alt="">
+            </ion-avatar>
 
-        <div class="text-center w-2/3 mx-auto">
-            <ion-title>Username</ion-title>
-            <small class="text-gray-400">33 Jalan rozhan cherok tokun, 14000 Pulau Pinang</small>
+            <div class="text-center w-2/3 mx-auto">
+                <div>{{ user.name }}</div>
+                <small class="text-gray-400">{{ formatAddress(detail.address) }}</small>
+            </div>
         </div>
+
+        <ion-list>
+            <ion-item class="border-b-2 border-gray-300" lines="none">
+                <ion-label class="text-md font-bold">Name</ion-label>
+                <ion-text class="text-gray-400">{{ user.name }}</ion-text>
+            </ion-item>
+            <ion-item class="border-b-2 border-gray-300" lines="none">
+                <ion-label class="text-md font-bold">Email</ion-label>
+                <ion-text class="text-gray-400">{{ user.email }}</ion-text>
+            </ion-item>
+            <div class="border-b-2 pb-4 border-gray-300">
+                <ion-item lines="none">
+                    <ion-label class="text-md font-bold">Address</ion-label>
+                </ion-item>
+                <div class="px-6">
+                    <ion-text class="text-gray-400">{{ formatAddress(detail.address) }}</ion-text>
+                </div>
+            </div>
+            <div class="border-b-2 pb-4 border-gray-300">
+                <ion-item lines="none">
+                    <ion-label class="text-md font-bold">Shipping Address</ion-label>
+                </ion-item>
+                <div class="px-6">
+                    <ion-text class="text-gray-400">{{ formatAddress(detail.shipping_address) }}</ion-text>
+                </div>
+            </div>
+            <ion-item class="border-b-2 border-gray-300" lines="none">
+                <ion-label class="text-md font-bold">Payment</ion-label>
+                <ion-text class="text-gray-400">{{ detail.payment_type }}</ion-text>
+            </ion-item>
+            <ion-item class="border-b-2 border-gray-300" lines="none">
+                <ion-label class="text-md font-bold">Date Joined</ion-label>
+                <ion-text class="text-gray-400">{{ user.created_at }}</ion-text>
+            </ion-item>
+        </ion-list>
     </div>
 
-    <ion-list>
-        <ion-item class="border-b-2 border-gray-300" lines="none">
-            <ion-label class="text-md font-bold">Full Name</ion-label>
-            <ion-text class="text-gray-400">John Doe</ion-text>
-        </ion-item>
-        <ion-item class="border-b-2 border-gray-300" lines="none">
-            <ion-label class="text-md font-bold">Email</ion-label>
-            <ion-text class="text-gray-400">admin@admin.com</ion-text>
-        </ion-item>
-        <ion-item class="border-b-2 border-gray-300" lines="none">
-            <ion-label class="text-md font-bold">Address</ion-label>
-            <ion-text class="text-gray-400">33 Jalan rozhan</ion-text>
-        </ion-item>
-        <ion-item class="border-b-2 border-gray-300" lines="none">
-            <ion-label class="text-md font-bold">Shipping Address</ion-label>
-            <ion-text class="text-gray-400">33 Jalan rozhan</ion-text>
-        </ion-item>
-        <ion-item class="border-b-2 border-gray-300" lines="none">
-            <ion-label class="text-md font-bold">Payment</ion-label>
-            <ion-text class="text-gray-400">Bank Transfer</ion-text>
-        </ion-item>
-        <ion-item class="border-b-2 border-gray-300" lines="none">
-            <ion-label class="text-md font-bold">Date Joined</ion-label>
-            <ion-text class="text-gray-400">27/3/2020</ion-text>
-        </ion-item>
-    </ion-list>
+    <ng-template #placeholder>
+        <div class="px-6">
+            <div class="py-4">
+                <ion-avatar class="mx-auto">
+                    <ion-skeleton-text animated></ion-skeleton-text>
+                </ion-avatar>
+            </div>
+            <ion-skeleton-text class="h-4" animated></ion-skeleton-text>
+            <ion-skeleton-text class="h-4" animated></ion-skeleton-text>
+            <ion-skeleton-text class="h-4" animated></ion-skeleton-text>
+            <ion-skeleton-text class="h-4" animated></ion-skeleton-text>
+
+            <div class="py-4">
+                <ion-skeleton-text class="h-4" animated></ion-skeleton-text>
+                <ion-skeleton-text class="h-4" animated></ion-skeleton-text>
+                <ion-skeleton-text class="h-4" animated></ion-skeleton-text>
+            </div>
+        </div>
+    </ng-template>
 </ion-content>

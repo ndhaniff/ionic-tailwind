@@ -1,6 +1,8 @@
 <ion-header mode="ios">
     <ion-toolbar>
-        <ion-back-button></ion-back-button>
+        <ion-buttons>
+            <ion-back-button slot="start" text=""></ion-back-button>
+        </ion-buttons>
         <ion-title>Signup</ion-title>
     </ion-toolbar>
 </ion-header>
@@ -11,33 +13,68 @@
         <div class="brand flex items-center justify-center">
             <h1 class="text-left text-x2 py-8 font-semibold">Start shopping now!</h1>
         </div>
-        <form class="p-4 flex-1 flex flex-col justify-center">
+        <form [formGroup]="signUpForm" class="p-4 flex-1 flex flex-col justify-center">
             <div class="input__wrapper mb-4">
-                <ion-input class=" bg-gray-300" type="text" placeholder="Full Name"></ion-input>
+                <ion-input formControlName="name" class="px-2 bg-gray-300" type="text" placeholder="Name"></ion-input>
+                <div class="text-red-600 text-xs">
+                    <div *ngIf="name.hasError('required') && signUpForm.touched">
+                        Name is required
+                    </div>
+                </div>
             </div>
             <div class="input__wrapper mb-4">
-                <ion-input class=" bg-gray-300" type="email" placeholder="Email"></ion-input>
+                <ion-input formControlName="email" class="px-2 bg-gray-300" type="email" placeholder="Email">
+                </ion-input>
+                <div class="text-red-600 text-xs">
+                    <div *ngIf="email.hasError('email') && !email.hasError('required') && signUpForm.touched">
+                        Email is invalid
+                    </div>
+                    <div *ngIf="email.hasError('required') && signUpForm.touched">
+                        Email is required
+                    </div>
+                </div>
             </div>
             <div class="input__wrapper mb-4">
-                <ion-input class=" bg-gray-300" type="password" placeholder="Password"></ion-input>
+                <ion-input formControlName="password" class="px-2 bg-gray-300" type="password" placeholder="Password">
+                </ion-input>
+                <div class="text-red-600 text-xs">
+                    <div *ngIf="password.hasError('maxLength') && !password.hasError('required') && signUpForm.touched">
+                        Password must be more than 6 characters
+                    </div>
+                    <div *ngIf="email.hasError('required') && signUpForm.touched">
+                        Password is required
+                    </div>
+                </div>
             </div>
             <div class="input__wrapper mb-4">
-                <ion-input class=" bg-gray-300" type="confirm" placeholder="Confirm Password"></ion-input>
+                <ion-input formControlName="confirm_pass" class="px-2 bg-gray-300" type="password"
+                    placeholder="Confirm Password"></ion-input>
+                <div class="text-red-600 text-xs">
+                    <div
+                        *ngIf="signUpForm.hasError('notSame') && !confirm_pass.hasError('required') && signUpForm.touched">
+                        Password is not match
+                    </div>
+                    <div *ngIf="confirm_pass.hasError('required') && signUpForm.touched">
+                        Confirm Password is required
+                    </div>
+                </div>
             </div>
             <div class="input__wrapper">
                 <ion-item lines="none">
                     <ion-label class="text-gray-700">Create seller account?</ion-label>
-                    <ion-toggle></ion-toggle>
+                    <ion-toggle formControlName="is_seller"></ion-toggle>
                 </ion-item>
             </div>
 
-            <ion-button color="primary" expand="block">Create an account</ion-button>
+            <ion-button (click)="signUp()" [disabled]="signUpForm.invalid" color="primary" expand="block">Create an
+                account</ion-button>
 
             <div class="mt-4 w-2/3 text-center mx-auto">
                 <span class="text-xs">By signing up you agree to our <span class="text-primary">Terms</span> and <span
                         class="text-primary">Conditions of Use</span></span>
             </div>
-            <ion-button class="bg-gray-300 text-gray-700 mt-4" color="default" expand="block">I have an account
+            <ion-button (click)="signIn()" class="bg-gray-300 text-gray-700 mt-4" color="default" expand="block">I have
+                an account
             </ion-button>
         </form>
     </div>

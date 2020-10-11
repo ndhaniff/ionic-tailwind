@@ -1,9 +1,75 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>add</ion-title>
-  </ion-toolbar>
+<ion-header mode="ios">
+    <ion-toolbar>
+        <ion-buttons>
+            <ion-back-button slot="start" text=""></ion-back-button>
+        </ion-buttons>
+        <ion-title>Add Product</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
+    <div class="wrapper py-4">
+        <div class="image-uploader px-6 pt-4 pb-6 border-b-4 border-gray-400 grid grid-cols-3 gap-3">
+            <div *ngFor="let img of uploadedImages; index as i" class="uploaded-img relative">
+                <img width="100%" class="object-cover h-full" [src]="img" alt="" />
+                <span (click)="removeImg(i)"
+                    class="text-red-600 absolute top-0 right-0 font-bold bg-gray-300 px-2 rounded-lg">-</span>
+            </div>
+            <label *ngIf="uploadedImages.length <= 4" for="uploader" class="border text-center border-gray-300">
+                <div class="text-3xl py-6 text-gray-300">+</div>
+            </label>
+            <input multiple accept="image/x-png,image/gif,image/jpeg" (change)="uploadImage($event)" id="uploader"
+                type="file" class="hidden" />
+        </div>
 
+        <div class="p-6">
+            <form [formGroup]="addproductform">
+                <div class="input__wrapper mb-4">
+                    <ion-input formControlName="name" mode="ios" class="px-4 border border-gray-400" placeholder="Name">
+                    </ion-input>
+                </div>
+                <div class="textarea__wrapper mb-4">
+                    <ion-textarea formControlName="desc" mode="ios" class="border px-4 border-gray-400"
+                        placeholder="Description">
+                    </ion-textarea>
+                </div>
+                <div class="input__wrapper mb-4">
+                    <ion-input mode="ios" inputmode="numeric" formControlName="price" (keypress)="numberOnly($event)"
+                        type="number" step="0.01" class="px-4 border border-gray-400"
+                        placeholder="Price in RM eg: 10.00">
+                    </ion-input>
+                </div>
+                <div class="input__wrapper mb-4">
+                    <ion-input mode="ios" inputmode="numeric" formControlName="sale_price"
+                        (keypress)="numberOnly($event)" type="number" step="0.01" class="px-4 border border-gray-400"
+                        placeholder="Sale Price in RM eg: 10.00">
+                    </ion-input>
+                </div>
+                <div *ngIf="categories" class="select__wrapper mb-4">
+                    <ion-select (ionChange)="loadSubcategory(category.value)" mode="ios"
+                        class="px-4 border border-gray-400" placeholder="Category" formControlName="category">
+                        <ion-select-option class="capitalize" *ngFor="let c of categories" [value]="c.uid">{{ c.name }}
+                        </ion-select-option>
+                    </ion-select>
+                </div>
+
+                <div *ngIf="subcategory && subcategory.length > 0" class="select__wrapper mb-4">
+                    <ion-select formControlName="sub_category" mode="ios" class="px-4 border border-gray-400"
+                        placeholder="Sub Category">
+                        <ion-select-option *ngFor="let c of subcategory" [value]="c.uid">{{ c.name }}</ion-select-option>
+                    </ion-select>
+                </div>
+                <div class="select__wrapper mb-4">
+                    <ion-select formControlName="tags" multiple mode="ios" class="px-4 border border-gray-400"
+                        placeholder="Tags">
+                        <ion-select-option value="newarrival">New Arrival</ion-select-option>
+                        <ion-select-option value="trending">Trending</ion-select-option>
+                    </ion-select>
+                </div>
+
+                <ion-button [disabled]="addproductform.invalid" expand="block" color="primary"
+                    (click)="createProduct()">Create Product</ion-button>
+            </form>
+        </div>
+    </div>
 </ion-content>

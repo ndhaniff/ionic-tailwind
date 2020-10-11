@@ -30,5 +30,4 @@ export interface Product {
     tag: string,
     reviews: Review[],
     created_at: string,
-    updated_at: string
 }

@@ -62,6 +62,7 @@ const routes: Routes = [
         // redirectTo: 'products/single/1',
         pathMatch: 'full'
     },
+
 ]
 
 @NgModule({

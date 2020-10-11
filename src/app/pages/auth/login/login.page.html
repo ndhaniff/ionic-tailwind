@@ -1,6 +1,8 @@
 <ion-header mode="ios">
     <ion-toolbar>
-        <ion-back-button></ion-back-button>
+        <ion-buttons>
+            <ion-back-button slot="start" text=""></ion-back-button>
+        </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
@@ -9,17 +11,29 @@
         <div class="brand flex-1 flex items-center justify-center">
             <h1 class="text-center"><span class="text-2xl text-primary">UM</span><span class="text-xl">mart</span></h1>
         </div>
-        <form class="p-4 flex-1">
+        <form [formGroup]="loginform" class="p-4 flex-1">
             <div class="input__wrapper mb-4">
-                <ion-input class=" bg-gray-300" type="email" placeholder="Email"></ion-input>
+                <ion-input formControlName="email" class="px-2 bg-gray-300" type="email" placeholder="Email">
+                </ion-input>
+                <div class="error-text text-red-600 text-xs">
+                    <div *ngIf="email.invalid && email.value !== '' && email.touched">Email is invalid</div>
+                    <div *ngIf="email.value === '' && email.touched">Email is required</div>
+                </div>
             </div>
             <div class="input__wrapper mb-4">
-                <ion-input class=" bg-gray-300" type="password" placeholder="Password"></ion-input>
+                <ion-input formControlName="password" class="px-2 bg-gray-300" type="password" placeholder="Password">
+                </ion-input>
+                <div class="error-text text-red-600 text-xs">
+                    <div *ngIf="password.invalid && password.value !== '' && password.touched">Password must be more
+                        than 6 characters</div>
+                    <div *ngIf="password.value === '' && password.touched">Password is required</div>
+                </div>
             </div>
 
             <div class="grid grid-cols-2 gap-3">
-                <ion-button color="default" class="bg-gray-900 rounded">Sign up</ion-button>
-                <ion-button color="primary" (click)="testLogin()">Sign in</ion-button>
+                <ion-button (click)="signUp()" color="default" class="bg-gray-900 rounded-lg">Sign up</ion-button>
+                <ion-button [disabled]="loginform.invalid" color="primary" (click)="attemptSignIn()">Sign in
+                </ion-button>
             </div>
             <div class="text-center mt-4">
                 <div class="text-xs text-primary">Forgot Password?</div>

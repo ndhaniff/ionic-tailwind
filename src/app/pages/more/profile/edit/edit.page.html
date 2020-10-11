@@ -1,66 +1,91 @@
 <ion-header mode="ios">
     <ion-toolbar>
+        <ion-buttons>
+            <ion-back-button slot="start" text=""></ion-back-button>
+        </ion-buttons>
         <ion-title class="text-xl">Edit Profile</ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content>
     <div class="profile-banner p-6 text-center border-b-4 border-gray-300">
-        <ion-avatar class="mx-auto" size="large">
-            <img src="/assets/images/avatar1.jpg" alt="">
+        <ion-avatar (click)="openCamera()" class="mx-auto" size="large">
+            <img class="object-cover h-full" #avatarimg
+                [src]="detail.avatar ? detail.avatar : '/assets/images/avatar.png'" alt="" />
         </ion-avatar>
 
         <div class="text-center w-2/3 mx-auto">
-            <ion-title>Avatar</ion-title>
+            <div>Avatar</div>
         </div>
     </div>
 
     <div class="form">
-        <form>
-            <div class="border-b-4 p-6 border-gray-300 input__wrapper mb-4 ">
-                <ion-input class=" bg-gray-200" type="text" value="John Doe" placeholder="Full Name"></ion-input>
+        <form [formGroup]="editForm">
+            <div class="border-b-4 p-6 border-gray-300 input__wrapper mb-4">
+                <ion-input [ngClass]="errorBorder('name', 'required')" class="px-2 bg-gray-200" formControlName="name"
+                    type="text" placeholder="Name"></ion-input>
             </div>
-            <div class="border-b-4 p-6 border-gray-300">
+            <div formGroupName="address" class="border-b-4 p-6 border-gray-300">
                 <div class="header text-md mb-3">Address</div>
                 <div class="input__wrapper mb-4">
-                    <ion-input class=" bg-gray-200" type="text" value="2233 Jalan Rozhan" placeholder="Address line 1">
+                    <ion-input [ngClass]="errorBorder('address.street1', 'required')" formControlName="street1"
+                        class="px-2 bg-gray-200" type="text" placeholder="Address line 1">
                     </ion-input>
                 </div>
                 <div class="input__wrapper mb-4">
-                    <ion-input class=" bg-gray-200" type="text" value="" placeholder="Address line 2"></ion-input>
+                    <ion-input formControlName="street2" class="px-2 bg-gray-200" type="text"
+                        placeholder="Address line 2"></ion-input>
                 </div>
                 <div class="input__wrapper mb-4">
-                    <ion-input class=" bg-gray-200" type="text" value="14000" placeholder="Poscode"></ion-input>
+                    <ion-input [ngClass]="errorBorder('address.poscode', 'required')" formControlName="poscode"
+                        class="px-2 bg-gray-200" type="text" placeholder="Poscode">
+                    </ion-input>
                 </div>
                 <div class="input__wrapper mb-4">
-                    <ion-input class=" bg-gray-200" type="text" value="Cherok Tokun" placeholder="City"></ion-input>
+                    <ion-input [ngClass]="errorBorder('address.state', 'required')" formControlName="state"
+                        class="px-2 bg-gray-200" type="text" placeholder="State">
+                    </ion-input>
+                </div>
+                <div class="input__wrapper mb-4">
+                    <ion-input [ngClass]="errorBorder('address.city', 'required')" formControlName="city"
+                        class="px-2 bg-gray-200" type="text" value="Cherok Tokun" placeholder="City"></ion-input>
                 </div>
             </div>
 
-            <div class="border-b-4 p-6  border-gray-300">
-                <div class="header text-md flex justify-between mb-3">Shipping Address <span
-                        class="text-tiny text-primary">Same as
-                        Address</span></div>
+            <div formGroupName="shipping_address" class="border-b-4 p-6 border-gray-300">
+                <div class="header text-md flex justify-between mb-3">
+                    Shipping Address
+                    <span (click)="sameAsAddress()" class="text-tiny text-primary">Same as Address</span>
+                </div>
                 <div class="input__wrapper mb-4">
-                    <ion-input class=" bg-gray-200" type="text" value="2233 Jalan Rozhan" placeholder="Address line 1">
+                    <ion-input [ngClass]="errorBorder('shipping_address.street1', 'required')" formControlName="street1"
+                        class="px-2 bg-gray-200" type="text" placeholder="Address line 1">
                     </ion-input>
                 </div>
                 <div class="input__wrapper mb-4">
-                    <ion-input class=" bg-gray-200" type="text" value="" placeholder="Address line 2"></ion-input>
+                    <ion-input formControlName="street2" class="px-2 bg-gray-200" type="text"
+                        placeholder="Address line 2"></ion-input>
                 </div>
                 <div class="input__wrapper mb-4">
-                    <ion-input class=" bg-gray-200" type="text" value="14000" placeholder="Poscode"></ion-input>
+                    <ion-input [ngClass]="errorBorder('shipping_address.poscode', 'required')" formControlName="poscode"
+                        class="px-2 bg-gray-200" type="text" placeholder="Poscode">
+                    </ion-input>
                 </div>
                 <div class="input__wrapper mb-4">
-                    <ion-input class=" bg-gray-200" type="text" value="Cherok Tokun" placeholder="City"></ion-input>
+                    <ion-input [ngClass]="errorBorder('shipping_address.state', 'required')" formControlName="state"
+                        class="px-2 bg-gray-200" type="text" placeholder="State">
+                    </ion-input>
+                </div>
+                <div class="input__wrapper mb-4">
+                    <ion-input [ngClass]="errorBorder('shipping_address.city', 'required')" formControlName="city"
+                        class="px-2 bg-gray-200" type="text" value="Cherok Tokun" placeholder="City"></ion-input>
                 </div>
             </div>
         </form>
     </div>
 
-
     <ion-fab class="mr-3" vertical="bottom" horizontal="end" slot="fixed">
-        <ion-fab-button color="primary">
+        <ion-fab-button (click)="saveProfile()" color="primary">
             <ion-icon name="save-outline"></ion-icon>
         </ion-fab-button>
     </ion-fab>

@@ -1,0 +1,83 @@
+<ion-header mode="ios">
+    <ion-toolbar>
+        <ion-buttons>
+            <ion-back-button slot="start" text=""></ion-back-button>
+        </ion-buttons>
+        <ion-title>My Products</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div *ngIf="displayProducts" class="search-box p-4">
+        <div class="input_wrapper">
+            <ion-input [(ngModel)]="keyword" (ngModelChange)="search($event)" class="border border-grey-300 px-4"
+                placeholder="Search Here"></ion-input>
+        </div>
+    </div>
+    <ion-list *ngIf="displayProducts && displayProducts.length > 0">
+        <ion-item class="border-b-2 border-gray-300 py-4 mx-4" *ngFor="let p of displayProducts" lines="none">
+            <img slot="start" width="60px" height="30px" class="object-cover" [src]="p.images[0]" />
+            <div class="content w-full relative">
+                <div class="product-name">{{ p.name }}</div>
+                <span class="block text-xs text-tertiary">{{ p.category.name }} ({{ p.category.subcategory }})</span>
+                <div class="price text-sm text-primary">
+                    RM {{ p.price }} <span class="line-through text-gray-500"> {{ p.sale_price }} </span>
+                </div>
+                <div (click)="removeProduct(p.uid)" class="delete absolute top-0 right-0">
+                    <ion-icon color="danger" size="small" name="trash-outline"></ion-icon>
+                </div>
+            </div>
+        </ion-item>
+    </ion-list>
+
+    <div *ngIf="noproduct">
+        <div class="text-center text-xs p-4 text-gray-400">
+            You have no product add product
+            <span (click)="goToAddProduct()" class="text-primary">here</span>
+        </div>
+    </div>
+
+    <div *ngIf="!loaded" class="py-4">
+        <div class="flex mx-4">
+            <div class="mr-3 w-1/4">
+                <ion-skeleton-text class="h-16 w-full" animated></ion-skeleton-text>
+            </div>
+            <div class="flex-1">
+                <ion-skeleton-text class="h-3 w-full" animated></ion-skeleton-text>
+                <ion-skeleton-text class="h-3 w-full" animated></ion-skeleton-text>
+                <ion-skeleton-text class="h-3 w-full" animated></ion-skeleton-text>
+            </div>
+        </div>
+        <div class="flex mx-4">
+            <div class="mr-3 w-1/4">
+                <ion-skeleton-text class="h-16 w-full" animated></ion-skeleton-text>
+            </div>
+            <div class="flex-1">
+                <ion-skeleton-text class="h-3 w-full" animated></ion-skeleton-text>
+                <ion-skeleton-text class="h-3 w-full" animated></ion-skeleton-text>
+                <ion-skeleton-text class="h-3 w-full" animated></ion-skeleton-text>
+            </div>
+        </div>
+        <div class="flex mx-4">
+            <div class="mr-3 w-1/4">
+                <ion-skeleton-text class="h-16 w-full" animated></ion-skeleton-text>
+            </div>
+            <div class="flex-1">
+                <ion-skeleton-text class="h-3 w-full" animated></ion-skeleton-text>
+                <ion-skeleton-text class="h-3 w-full" animated></ion-skeleton-text>
+                <ion-skeleton-text class="h-3 w-full" animated></ion-skeleton-text>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="displayProducts && displayProducts.length === 0 && loaded"
+        class="text-center text-xs p-4 text-gray-400">
+        No product match your search
+    </div>
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button>
+            <ion-icon (click)="goToAddProduct()" name="add-outline"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+</ion-content>

@@ -1,29 +1,62 @@
 <ion-content>
     <div class="bannerbg bg-gray-300">
         <div class="banner p-4">
-            <div class="wrapper" *ngIf="false; else guest">
+            <div class="wrapper" *ngIf="isLoggedin; else guest">
                 <div class="mb-4">
                     <ion-avatar class="mx-auto" size="large">
-                        <ion-img src="assets/images/avatar1.jpg"></ion-img>
+                        <ion-img
+                            src="{{ avatar ? avatar : 'assets/images/avatar.png' }}">
+                        </ion-img>
                     </ion-avatar>
                 </div>
 
                 <div class="text-center">
-                    <ion-title>Username</ion-title>
+                    <div>{{ user.name }}</div>
                     <small>Date Joined: 27/03/2020</small>
                 </div>
             </div>
 
             <ng-template #guest>
                 <div class="flex justify-end">
-                    <button class="px-4 py-2 bg-gray-900 mr-3 text-white rounded">Sign up</button>
-                    <button class="px-4 py-2 bg-primary text-white rounded">Sign in</button>
+                    <button (click)="signUp()" class="px-4 py-2 bg-gray-900 mr-3 text-white rounded">Sign up</button>
+                    <button (click)="signIn()" class="px-4 py-2 bg-primary text-white rounded">Sign in</button>
                 </div>
             </ng-template>
         </div>
 
-        <ng-template *ngIf="false; else notloggedin">
+        <div *ngIf="isLoggedin; else notloggedin">
             <div class="mt-2 py-2 border-b-4 border-gray-300 bg-white">
+                <ion-item lines="none" class="title">
+                    <ion-icon  slot="start" name="clipboard-outline"></ion-icon>
+                    <div>
+                        My Purchase
+                    </div>
+                </ion-item>
+                <div style="border-bottom:solid 1px" class="w-full border-gray-300"></div>
+                <div class="px-6">
+
+                    <div class="tabs py-4 grid grid-cols-4 gap-3">
+                        <div class="flex flex-col items-center">
+                            <ion-icon size="large" class="text-gray-600" name="wallet-outline"></ion-icon>
+                            <div class="text-xs text-gray-600">To Pay</div>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <ion-icon size="large" class="text-gray-600" name="car-outline"></ion-icon>
+                            <div class="text-xs text-gray-600">To Ship</div>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <ion-icon size="large" class="text-gray-600" name="cube-outline"></ion-icon>
+                            <div class="text-xs text-gray-600">To Receive</div>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <ion-icon size="large" class="text-gray-600" name="star-outline"></ion-icon>
+                            <div class="text-xs text-gray-600">To Rate</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="user.is_seller" class="py-2 border-b-4 border-gray-300 bg-white">
                 <ion-item lines="none">
                     <ion-icon slot="start" name="pricetag-outline"></ion-icon>
                     <ion-label>My Shop</ion-label>
@@ -39,9 +72,9 @@
                     <ion-label>Sales</ion-label>
                     <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
                 </ion-item>
-                <ion-item (click)="goTo('/products')" lines="none">
+                <ion-item (click)="goTo('/products/myproducts')" lines="none">
                     <ion-icon slot="start" name="cube-outline"></ion-icon>
-                    <ion-label>Product Management</ion-label>
+                    <ion-label>My Product</ion-label>
                     <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
                 </ion-item>
             </div>
@@ -55,10 +88,10 @@
 
                 <ion-item lines="none">
                     <ion-icon slot="start" name="log-out-outline"></ion-icon>
-                    <ion-label>Sign out</ion-label>
+                    <ion-label (click)="signOut()">Sign out</ion-label>
                 </ion-item>
             </div>
-        </ng-template>
+        </div>
 
 
         <ng-template #notloggedin>

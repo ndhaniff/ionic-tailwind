@@ -1,6 +1,8 @@
 export interface User {
-    name: string,
+    uid: string,
+    name?: string,
     email: string,
     password?: string,
-    is_seller: boolean,
+    avatarUrl?: string,
+    is_seller?: boolean,
 }
