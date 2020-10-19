@@ -1,0 +1,32 @@
+<ion-header mode="ios">
+  <div class="flex items-center justify-between p-4">
+    <ion-icon (click)="goBack()" color="primary" name="chevron-back-outline" size="large"></ion-icon>
+    <ion-icon (click)="openFilterMenu()" name="filter-outline" size="large"></ion-icon>
+  </div>
+  
+  <div *ngIf="products" class="border rounded-md mx-4 px-2">
+    <ion-item lines="none">
+        <ion-input [(ngModel)]="keyword" (ngModelChange)="search($event)" placeholder="Search For..."></ion-input>
+        <ion-icon name="search-outline" size="medium" slot="start"></ion-icon>
+    </ion-item>
+</div>
+</ion-header>
+
+<ion-content>
+    <div class="wrapper px-6 pt-2" *ngIf="result && !loading;">
+        <div class="text-3xl font-bold capitalize">{{keyword}}</div>
+        <div *ngIf="result.length > 0" class="text-sm text-gray-400 mb-4">{{result.length}} results found</div>
+        <div class="grid grid-cols-2 gap-3">
+            <app-productcard (click)="goToProduct(product.uid)" *ngFor=" let product of result"
+                [product]="product">
+            </app-productcard>
+        </div>
+    </div>
+    <div *ngIf="loading" class="px-6 pt-2 text-center">
+        <ion-spinner color="primary" name="crescent"></ion-spinner>
+    </div>
+
+    <div *ngIf="!loading && result.length === 0" class="px-6 pt-2 text-center">
+        <div class="text-sm text-gray-400">No product found</div>
+    </div>
+</ion-content>

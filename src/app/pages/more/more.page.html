@@ -2,18 +2,20 @@
     <div class="bannerbg bg-gray-300">
         <div class="banner p-4">
             <div class="wrapper" *ngIf="isLoggedin; else guest">
-                <div class="mb-4">
-                    <ion-avatar class="mx-auto" size="large">
-                        <ion-img
-                            src="{{ avatar ? avatar : 'assets/images/avatar.png' }}">
-                        </ion-img>
-                    </ion-avatar>
-                </div>
-
-                <div class="text-center">
-                    <div>{{ user.name }}</div>
-                    <small>Date Joined: 27/03/2020</small>
-                </div>
+                <ng-container *ngIf="user">
+                    <div class="mb-4">
+                        <ion-avatar class="mx-auto" size="large">
+                            <ion-img
+                                src="{{ avatar ? avatar : 'assets/images/avatar.png' }}">
+                            </ion-img>
+                        </ion-avatar>
+                    </div>
+    
+                    <div class="text-center">
+                        <div>{{ user.name }}</div>
+                        <small>Date Joined: 27/03/2020</small>
+                    </div>
+                </ng-container>
             </div>
 
             <ng-template #guest>

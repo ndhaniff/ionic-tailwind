@@ -64,7 +64,6 @@ export class SignupPage implements OnInit {
 
     signUp() {
         const { confirm_pass, email, password, ...rest } = this.signUpForm.value
-
         this.auth.SignUp(email, password, rest)
     }
 

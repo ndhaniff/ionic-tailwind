@@ -12,10 +12,22 @@ const routes: Routes = [
             {
                 path: 'single/:id',
                 loadChildren: () => import('./pages/products/single/single.module').then(m => m.SinglePageModule)
-            }
+            },
+            {
+                path: 'newarrivals',
+                loadChildren: () => import('./pages/products/newarrivals/newarrivals.module').then(m => m.NewarrivalsPageModule)
+            },
+            {
+                path: 'trending',
+                loadChildren: () => import('./pages/products/trending/trending.module').then(m => m.TrendingPageModule)
+            },
         ]
     },
 
+    {
+        path: 'search',
+        loadChildren: () => import('./pages/search/search.module').then(m => m.SearchPageModule)
+    },
     {
         path: 'login',
         loadChildren: () => import('./pages/auth/login/login.module').then(m => m.LoginPageModule)
@@ -62,6 +74,8 @@ const routes: Routes = [
         // redirectTo: 'products/single/1',
         pathMatch: 'full'
     },
+
+
 
 ]
 

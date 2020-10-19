@@ -62,13 +62,15 @@ export class AuthService {
 
     SetUserData(user, extra) {
         const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`)
+        console.log(extra)
         const userData = {
             uid: user.uid,
             email: user.email,
-            displayName: user.name,
+            displayName: extra.name,
             ...extra,
             created_at: moment().format('DD/MM/YYYY')
         }
+        localStorage['user'] = JSON.stringify(userData)
         return userRef.set(userData, { merge: true })
     }
 

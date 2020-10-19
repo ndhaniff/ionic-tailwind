@@ -1,3 +1,4 @@
+import { FiltermenuComponent } from './components/filtermenu/filtermenu.component'
 import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { RouteReuseStrategy } from '@angular/router'
@@ -16,9 +17,10 @@ import { AngularFireModule } from '@angular/fire'
 import { AngularFireAuthModule } from '@angular/fire/auth'
 import { AngularFireDatabaseModule } from '@angular/fire/database'
 import { AngularFirestoreModule } from '@angular/fire/firestore'
+import { FormsModule } from '@angular/forms'
 
 @NgModule({
-    declarations: [AppComponent],
+    declarations: [AppComponent, FiltermenuComponent],
     entryComponents: [],
     imports: [
         BrowserModule,
@@ -26,7 +28,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore'
         AppRoutingModule, AngularFireModule.initializeApp(environment.firebaseConfig),
         AngularFireAuthModule,
         AngularFireDatabaseModule,
-        AngularFirestoreModule
+        AngularFirestoreModule,
+        FormsModule
     ],
     providers: [
         StatusBar,

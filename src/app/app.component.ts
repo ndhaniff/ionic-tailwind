@@ -38,14 +38,14 @@ export class AppComponent {
             this.auth.user$.subscribe(data => {
                 localStorage['user'] = JSON.stringify(data)
 
-                if (data.is_seller) {
+                if (data && data.is_seller) {
                     this.auth.getSeller(data.uid)
                         .subscribe(data => {
                             localStorage['seller'] = JSON.stringify(data)
                         })
                 }
             })
-            // this.navCtrl.navigateForward('/tabs')
+            // this.navCtrl.navigateForward('/search')
         })
     }
 

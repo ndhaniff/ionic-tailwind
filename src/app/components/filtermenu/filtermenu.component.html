@@ -1,0 +1,33 @@
+<!-- Filter Menu -->
+<ion-menu side="end" menuId="filtermenu" contentId="main">
+    <ion-header>
+      <ion-toolbar mode="ios">
+        <ion-title>Filter</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <div class="mx-4 mt-2">
+        <div class="text-lg font-bold">Category</div>
+        <select [(ngModel)]="filter.category" class="my-4 px-4 py-2 border w-full">
+            <option value="all">All</option>
+            <option value="clothes">Clothing</option>
+            <option value="shoes">Shoes</option>
+            <option value="watches">Watches</option>
+            <option value="bag">Bag</option>
+        </select>
+        <div class="text-lg font-bold">Price</div>
+        <div class=" px-4">
+            <ion-range [(ngModel)]="filter.price" #pricefilter min="0" max="99999" class="p-0" id="dual-range" dual-knobs pin color="dark">
+            </ion-range>
+        </div>
+        <div class="flex justify-between px-4">
+            <ion-label slot="start">RM {{filter.price.lower}}</ion-label>
+            <ion-label slot="end">RM {{filter.price.upper}}</ion-label>
+        </div>
+      </div>
+
+      <div class="my-4 px-4">
+        <ion-button expand="block" (click)="filterProducts()" color="primary">Filter</ion-button>
+      </div>
+    </ion-content>
+  </ion-menu>

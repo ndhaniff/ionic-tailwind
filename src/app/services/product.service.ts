@@ -2,10 +2,11 @@ import { UtilService } from './util.service'
 import { NavController } from '@ionic/angular'
 import { Injectable } from '@angular/core'
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore'
-import { filter, map, mergeMap, switchMap } from 'rxjs/operators'
-import { combineLatest, of } from 'rxjs'
+import { filter, flatMap, map, mergeAll, mergeMap, switchMap, tap } from 'rxjs/operators'
+import { combineLatest, of, Observable } from 'rxjs'
 import { Product } from 'app/interfaces/product'
 import * as moment from 'moment'
+import { promise } from 'protractor'
 
 @Injectable({
     providedIn: 'root'
@@ -20,6 +21,40 @@ export class ProductService {
 
     getCategories() {
         return this.afs.collection(`categories`).valueChanges({ idField: 'uid' })
+    }
+
+    getProduct(id) {
+        let product$ = this.afs.doc(`products/${id}`).valueChanges()
+        let reviews$ = this.afs.collection('reviews', ref => ref.where('productId', '==', id))
+            .valueChanges({ idField: 'uid' })
+            .pipe(
+                switchMap(review => {
+                    return of(review.map((rev: any) => {
+                        return {
+                            ...rev,
+                            user: this.afs.doc(`users/${rev.userId}`).valueChanges()
+                        }
+                    }))
+                })
+            )
+
+        return product$.pipe(
+            switchMap(prod => {
+                return combineLatest([of(prod), reviews$]).pipe(
+                    map((data: any) => {
+                        return {
+                            ...data[0],
+                            reviews: data[1]
+                        }
+                    })
+                )
+            })
+        )
+
+    }
+
+    getProducts() {
+        return this.afs.collection('products').valueChanges({ idField: 'uid' })
     }
 
     getCategory(name) {

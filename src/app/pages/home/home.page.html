@@ -24,8 +24,10 @@
             </ion-slide>
         </ion-slides>
     </div>
-
-    <div class="wrapper p-3">
+    <div *ngIf="loading && products.length === 0" class="px-6 pt-2 text-center">
+        <ion-spinner color="primary" name="crescent"></ion-spinner>
+    </div>
+    <div *ngIf="products.length > 0" class="wrapper p-3">
         <div>
             <ion-slides mode="ios" #catSliderContent (ionSlideDidChange)="contentSlideChange()"
                 [options]="catSliderContentOpt">
@@ -39,7 +41,7 @@
                                 </div>
                             </div>
                             <div class="grid grid-cols-2 gap-4">
-                                <app-productcard (click)="goToProduct(product.id)" *ngFor=" let product of newArrivals"
+                                <app-productcard (click)="goToProduct(product.uid)" *ngFor=" let product of newArrivals"
                                     [product]="product">
                                 </app-productcard>
                             </div>
@@ -55,14 +57,14 @@
                                 </div>
                             </div>
 
-                            <app-producthorizontal *ngFor="let product of trending" [product]="product">
+                            <app-producthorizontal (click)="goToProduct(product.uid)" *ngFor="let product of trending" [product]="product">
                             </app-producthorizontal>
                         </div>
                     </div>
                 </ion-slide>
                 <ion-slide>
                     <div class="wrapper">
-                        <div *ngIf="clothing.newarrival.length > 0" class="newarrival">
+                        <div *ngIf="clothes.newarrival.length > 0" class="newarrival">
                             <div class="my-3">
                                 <div class="w-full flex justify-between items-center">
                                     <div class="text-lg font-semibold">New Arrivals</div>
@@ -70,13 +72,13 @@
                                 </div>
                             </div>
                             <div class="grid grid-cols-2 gap-4">
-                                <app-productcard *ngFor="let product of clothing.newarrival" [product]="product">
+                                <app-productcard *ngFor="let product of clothes.newarrival" [product]="product">
                                 </app-productcard>
                             </div>
                         </div>
 
 
-                        <div *ngIf="clothing.trending.length > 0" class="trending">
+                        <div *ngIf="clothes.trending.length > 0" class="trending">
                             <div class="divider my-6 border-gray-200 border-b-2"></div>
                             <div class="mb-4">
                                 <div class="w-full flex justify-between items-center">
@@ -85,7 +87,7 @@
                                 </div>
                             </div>
 
-                            <app-producthorizontal *ngFor="let product of clothing.trending" [product]="product">
+                            <app-producthorizontal *ngFor="let product of clothes.trending" [product]="product">
                             </app-producthorizontal>
                         </div>
                     </div>
@@ -151,7 +153,7 @@
                     </div>
                 </ion-slide>
                 <ion-slide>
-                    <div class="wrapper">
+                    <div  class="wrapper">
                         <div *ngIf="watches.newarrival.length > 0" class="newarrival">
                             <div class="my-3">
                                 <div class="w-full flex justify-between items-center">
