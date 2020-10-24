@@ -9,7 +9,8 @@
             </div>
         </ion-tab-button>
         <ion-tab-button tab="cart">
-            <div class="cb__tab__btn">
+            <div class="cb__tab__btn relative">
+                <div *ngIf="cartCount" class="absolute cart-count bg-primary">{{cartCount}}</div>
                 <div class="cb__icon">
                     <ion-icon size="large" name="cart-outline"></ion-icon>
                 </div>

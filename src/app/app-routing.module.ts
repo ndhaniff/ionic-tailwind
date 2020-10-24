@@ -46,6 +46,11 @@ const routes: Routes = [
         path: 'cart',
         loadChildren: () => import('./pages/cart/cart.module').then(m => m.CartPageModule)
     },
+
+    {
+        path: 'checkout',
+        loadChildren: () => import('./pages/shop/checkout/checkout.module').then(m => m.CheckoutPageModule)
+    },
     {
         path: 'account',
         children: [
@@ -74,6 +79,7 @@ const routes: Routes = [
         // redirectTo: 'products/single/1',
         pathMatch: 'full'
     },
+
 
 
 

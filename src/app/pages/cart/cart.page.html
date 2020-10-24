@@ -5,5 +5,39 @@
 </ion-header>
 
 <ion-content>
+   <div class="h-full flex flex-col justify-between" *ngIf="cartItems && cartItems.cart.length > 0; else noproduct">
+       <div class="my-4">
+        <ion-item class="mb-4" lines="none" *ngFor="let p of cartItems.cart">
+            <div  style="width:20%; height:71px" slot="start">
+                <img class="object-cover" [src]="p.image" alt="">
+            </div>
+            <div class="content w-full flex items-center justify-between">
+                <div  (click)="goToProduct(p.uid)">
+                    <div class=" text-sm font-semibold">{{p.name}}</div>
+                    <div class="text-xs text-gray-500">RM {{p.price}}</div>
+                </div>
+                <div class="flex items-center">
+                    <div (click)="removeProduct(p, true)" *ngIf="p.count > 1" class="plus px-2 border">-</div>
+                    <div style="width:40px" class="count text-xs px-2">x {{p.count}}</div>
+                    <div (click)="addProduct(p, true)" class="minus px-2 border">+</div>
+                </div>
+            </div>
+            <div slot="end">
+             <ion-icon (click)="removeProduct(p)" color="danger" size="medium" name="trash-outline"></ion-icon>
+            </div>
+        </ion-item>
+       </div>
+       <div class="footer my-4 px-4">
+           <div>
+               <ion-item>Subtotal: <div class="w-1/3" slot="end">RM {{cartItems.totals.subTot}}</div></ion-item>
+               <ion-item>SST 6%: <div class="w-1/3" slot="end">RM {{cartItems.totals.tax}}</div></ion-item>
+               <ion-item>Total: <div class="w-1/3" slot="end">RM {{cartItems.totals.grandTot}}</div></ion-item>
+           </div>
+           <ion-button (click)="goToCheckout()" expand="block" color="primary" class="rounded">Checkout</ion-button>
+       </div>
+   </div>
 
+   <ng-template #noproduct>
+       <div class="my-4 text-gray-500 text-sm text-center" >There is no product in your cart</div>
+   </ng-template>
 </ion-content>

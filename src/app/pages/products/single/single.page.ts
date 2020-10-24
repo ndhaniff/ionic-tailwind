@@ -1,3 +1,4 @@
+import { CartService } from './../../../services/cart.service'
 import { ProductService } from './../../../services/product.service'
 import { SwiperOptions } from 'swiper'
 import { products } from './../../../mockdata/products'
@@ -12,6 +13,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core'
 })
 export class SinglePage implements OnInit {
     productimg: ElementRef
+    uid: string
     product: any
     thumbOption: SwiperOptions = {
         slidesPerView: 3,
@@ -21,7 +23,8 @@ export class SinglePage implements OnInit {
 
     constructor(
         private route: ActivatedRoute,
-        private productSvc: ProductService
+        private productSvc: ProductService,
+        private cartSvc: CartService
     ) {
     }
 
@@ -40,8 +43,8 @@ export class SinglePage implements OnInit {
     }
 
     ngOnInit() {
-        let uid = this.route.snapshot.paramMap.get('id')
-        this.productSvc.getProduct(uid).subscribe(this.setProduct.bind(this))
+        this.uid = this.route.snapshot.paramMap.get('id')
+        this.productSvc.getProduct(this.uid).subscribe(this.setProduct.bind(this))
     }
 
     setProduct(prod) {
@@ -51,6 +54,15 @@ export class SinglePage implements OnInit {
             expanded: false
         }
         this.product.seller.shop = JSON.parse(this.product.seller.shop)
+    }
+
+    addToCart() {
+        this.cartSvc.addCartItem({
+            uid: this.uid,
+            image: this.product.images[0],
+            name: this.product.name,
+            price: this.product.price
+        })
     }
 
     selectImage(src) {

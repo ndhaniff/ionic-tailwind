@@ -129,7 +129,6 @@ export class HomePage implements OnInit {
 
     filterProduct(prod, catname) {
         let filtered = prod.filter(product => product.category.name === catname)
-        console.log(filtered)
         return {
             newarrival: filtered.filter(product => product.tags.split(',').includes('newarrival')).slice(0, 4),
             trending: filtered.filter(product => product.tags.split(',').includes('trending')).slice(0, 4)
