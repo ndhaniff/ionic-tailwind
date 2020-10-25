@@ -17,6 +17,10 @@ export class TabsPage implements OnInit {
     ) { }
 
     ngOnInit() {
+
+    }
+
+    ionViewDidEnter() {
         this.$cartSubscription = this.cartSvc.state$.subscribe(val => {
             let formatted = val.cart.filter((item, i, self) => {
                 return i === self.findIndex((it) => {
@@ -29,6 +33,10 @@ export class TabsPage implements OnInit {
 
     getSelectedTab() {
         this.activeTab = this.router.url
+    }
+
+    ngOnDestroy() {
+        this.$cartSubscription.unsubsribe()
     }
 
 }

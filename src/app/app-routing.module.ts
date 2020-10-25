@@ -51,6 +51,11 @@ const routes: Routes = [
         path: 'checkout',
         loadChildren: () => import('./pages/shop/checkout/checkout.module').then(m => m.CheckoutPageModule)
     },
+
+    {
+        path: 'order/:id',
+        loadChildren: () => import('./pages/shop/order/order.module').then(m => m.OrderPageModule)
+    },
     {
         path: 'account',
         children: [
@@ -78,7 +83,12 @@ const routes: Routes = [
         redirectTo: '/tabs/home',
         // redirectTo: 'products/single/1',
         pathMatch: 'full'
-    },
+    },  {
+    path: 'thankyou',
+    loadChildren: () => import('./pages/shop/thankyou/thankyou.module').then( m => m.ThankyouPageModule)
+  },
+
+
 
 
 

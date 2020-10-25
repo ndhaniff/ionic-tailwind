@@ -19,7 +19,7 @@
 
             <div class="text-center w-2/3 mx-auto">
                 <div>{{ user.name }}</div>
-                <small class="text-gray-400">{{ formatAddress(detail.address) }}</small>
+                <small class="text-gray-400">{{ detail.address ? formatAddress(detail.address) : 'Please add your address' }}</small>
             </div>
         </div>
 
@@ -37,7 +37,7 @@
                     <ion-label class="text-md font-bold">Address</ion-label>
                 </ion-item>
                 <div class="px-6">
-                    <ion-text class="text-gray-400">{{ formatAddress(detail.address) }}</ion-text>
+                    <ion-text class="text-gray-400">{{detail.address ? formatAddress(detail.address): 'Please add your address' }}</ion-text>
                 </div>
             </div>
             <div class="border-b-2 pb-4 border-gray-300">
@@ -45,7 +45,7 @@
                     <ion-label class="text-md font-bold">Shipping Address</ion-label>
                 </ion-item>
                 <div class="px-6">
-                    <ion-text class="text-gray-400">{{ formatAddress(detail.shipping_address) }}</ion-text>
+                    <ion-text class="text-gray-400">{{detail.address ? formatAddress(detail.shipping_address): 'Please add your address' }}</ion-text>
                 </div>
             </div>
             <ion-item class="border-b-2 border-gray-300" lines="none">

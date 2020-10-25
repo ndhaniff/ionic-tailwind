@@ -1,0 +1,5 @@
+.mail-border {
+    border-bottom: 4px solid transparent;
+	border-image: 4 repeating-linear-gradient(-45deg, red 0, red 1em, transparent 0, transparent 2em,
+	              #58a 0, #58a 3em, transparent 0, transparent 4em);
+}

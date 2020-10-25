@@ -44,12 +44,18 @@ export class CartService {
     ) { }
 
     private get productsInCart(): any {
+        let userId = JSON.parse(localStorage['user']).uid
+        console.log(userId)
         // get data from firebase
-        return this.afs.collection('carts').valueChanges({ idField: 'cartItemId' })
+        return this.afs.collection('carts', ref => ref.where('user_id', '==', userId)).valueChanges({ idField: 'cartItemId' })
     }
 
     async addToCart(product, single = false) {
-        await this.afs.collection(`carts`).add(product)
+        let userId = JSON.parse(localStorage['user']).uid
+        await this.afs.collection(`carts`).add({
+            user_id: userId,
+            ...product
+        })
         if (!single) {
             await this.util.presentToast('Product added to cart 😊', {
                 position: 'top'
@@ -112,14 +118,14 @@ export class CartService {
 
     private get total$(): any {
         return this.cart$.pipe(
-            map((items) => {
+            map((items: any) => {
                 let total = 0
                 for (const i of items) {
                     total += i.price
                 }
                 return total
             }),
-            map(cost => ({
+            map((cost: any) => ({
                 subTot: cost,
                 tax: .06 * cost,
                 grandTot: .06 * cost + cost

@@ -31,7 +31,16 @@ export class EditPage implements OnInit {
     }
 
     ngOnInit() {
-        const { address, shipping_address } = this.detail.detail
+        let { address, shipping_address } = this.detail.detail
+        if (!address || !shipping_address) {
+            address = shipping_address = {
+                street1: '',
+                street2: '',
+                poscode: '',
+                city: '',
+                state: ''
+            }
+        }
         this.getAvatar()
         this.editForm = this.fb.group({
             name: [this.detail.name, [Validators.required]],
@@ -44,11 +53,11 @@ export class EditPage implements OnInit {
                 country: ['Malaysia', [Validators.required]],
             }),
             shipping_address: this.fb.group({
-                street1: [shipping_address.street1, [Validators.required]],
-                street2: [shipping_address.street2],
-                poscode: [shipping_address.poscode, [Validators.required]],
-                city: [shipping_address.city, [Validators.required]],
-                state: [shipping_address.state, [Validators.required]],
+                street1: [shipping_address.street1 ?? '', [Validators.required]],
+                street2: [shipping_address.street2 ?? ''],
+                poscode: [shipping_address.poscode ?? '', [Validators.required]],
+                city: [shipping_address.city ?? '', [Validators.required]],
+                state: [shipping_address.state ?? '', [Validators.required]],
                 country: ['Malaysia', [Validators.required]],
             })
         })

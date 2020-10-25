@@ -71,6 +71,32 @@ export class AuthService {
             created_at: moment().format('DD/MM/YYYY')
         }
         localStorage['user'] = JSON.stringify(userData)
+
+        // add initial customer
+        let customer = this.afs.doc(`customers/${user.uid}`)
+        let placeholderAddress = {
+            street1: 'street1',
+            street2: 'street2',
+            poscode: '99999',
+            city: 'unknown',
+            state: 'unknown'
+        }
+
+        customer.set({
+            payment_type: 'banktransfer',
+            user_uid: user.uid
+        }, { merge: true })
+
+        this.afs.collection('addresses').add(placeholderAddress).then(docRef => {
+            customer.set({
+                address_id: docRef.id
+            }, { merge: true })
+        })
+        this.afs.collection('addresses').add(placeholderAddress).then(docRef => {
+            customer.set({
+                shipping_address_id: docRef.id
+            }, { merge: true })
+        })
         return userRef.set(userData, { merge: true })
     }
 
