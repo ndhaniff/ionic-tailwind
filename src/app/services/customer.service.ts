@@ -78,15 +78,11 @@ export class CustomerService {
         return customers.pipe(
             switchMap((customer: any) => {
                 let address, shipping_address
-                if (customer) {
-                    address = this.afs.doc(`addresses/${customer.address_id}`)
-                        .valueChanges()
-                    shipping_address = this.afs.doc(`addresses/${customer.shipping_address_id}`)
-                        .valueChanges()
-                } else {
-                    address = of(null)
-                    shipping_address = of(null)
-                }
+
+                address = this.afs.doc(`addresses/${customer.address_id}`)
+                    .valueChanges()
+                shipping_address = this.afs.doc(`addresses/${customer.shipping_address_id}`)
+                    .valueChanges()
 
                 return combineLatest([of(customer), address, shipping_address])
                     .pipe(

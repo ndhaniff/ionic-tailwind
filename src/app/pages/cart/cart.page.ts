@@ -11,6 +11,7 @@ import { map } from 'rxjs/operators'
 export class CartPage implements OnInit {
     cartSubscription$
     cartItems
+    loading = false
 
     constructor(
         private cartSvc: CartService,
@@ -28,12 +29,16 @@ export class CartPage implements OnInit {
 
     }
 
-    removeProduct(item, single = false) {
-        this.cartSvc.removeCartItem(item, single)
+    async removeProduct(item, single = false) {
+        this.loading = true
+        await this.cartSvc.removeCartItem(item, single)
+        this.loading = false
     }
 
-    addProduct(item) {
-        this.cartSvc.addCartItem(item, true)
+    async addProduct(item) {
+        this.loading = true
+        await this.cartSvc.addCartItem(item, true)
+        this.loading = false
     }
 
     goToProduct(uid) {

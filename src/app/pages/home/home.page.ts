@@ -24,7 +24,7 @@ export class HomePage implements OnInit {
         simulateTouch: false
     }
     loading = true
-
+    productSubscription$
     activeSlideIdx = 0
 
     categories = [
@@ -106,7 +106,11 @@ export class HomePage implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.productSvc.getProducts()
+
+    }
+
+    ionViewDidEnter() {
+        this.productSubscription$ = this.productSvc.getProducts()
             .pipe(
                 startWith(localStorage['products'] ? JSON.parse(localStorage['products']) : []),
                 tap(data => {
@@ -153,6 +157,10 @@ export class HomePage implements OnInit {
 
     goToProduct(uid) {
         this.navCtrl.navigateForward('products/single/' + uid)
+    }
+
+    ngOnDestroy() {
+        this.productSubscription$.unsubsribe()
     }
 
 }

@@ -45,7 +45,6 @@ export class CartService {
 
     private get productsInCart(): any {
         let userId = JSON.parse(localStorage['user']).uid
-        console.log(userId)
         // get data from firebase
         return this.afs.collection('carts', ref => ref.where('user_id', '==', userId)).valueChanges({ idField: 'cartItemId' })
     }
@@ -83,12 +82,10 @@ export class CartService {
             .ref.where("uid", "==", item.uid)
             .get()
             .then(querySnapshot => {
-                querySnapshot.forEach((doc) => {
-                    doc.ref.delete().then(() => {
-                        console.log("cart items successfully deleted!")
-                    }).catch(function (error) {
-                        console.error("Error removing document: ", error)
-                    })
+                querySnapshot.docs[0].ref.delete().then(() => {
+                    console.log("cart items successfully deleted!")
+                }).catch(function (error) {
+                    console.error("Error removing document: ", error)
                 })
             })
     }
@@ -167,16 +164,16 @@ export class CartService {
     // facade for next of cartAdd subject
     addCartItem(item, single = false) {
         this.cartAdd$.next({ ...item, remove: false })
-        this.addToCart({ ...item, remove: false }, single)
+        return this.addToCart({ ...item, remove: false }, single)
     }
     // facade for next of cartRemove subject
     removeCartItem(item, single = false) {
         if (single) {
             this.cartRemove$.next({ ...item, remove: true })
-            this.deleteSingleCartItem(item)
+            return this.deleteSingleCartItem(item)
         } else {
             this.cartRemove$.next({ ...item, removeAll: true })
-            this.deleteCartItem(item)
+            return this.deleteCartItem(item)
         }
     }
 }

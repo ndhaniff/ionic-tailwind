@@ -7,35 +7,18 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="orders">
     <ion-list class="p-2">
         <ion-list-header>
-            <span class="text-lg font-semibold text-gray-700">Total orders: 3</span>
+            <span class="text-lg font-semibold text-gray-700">Total orders: {{orders.length}}</span>
         </ion-list-header>
-        <ion-item lines="none" class="border-b-2 py-3 border-gray-300">
+        
+        <ion-item *ngFor="let order of orders" lines="none" class="border-b-2 py-3 border-gray-300">
             <img width="80px" slot="start" src="assets/images/shoe1.jpg" />
             <div>
-                <div class="text-md text-gray-700">Canvas Shoe</div>
-                <div class="text-sm text-gray-500">RM 200</div>
-                <div class="status text-center text-xs text-white bg-yellow-400 px-2">Pending</div>
-            </div>
-            <div slot="end" class="text-primary text-tiny">Edit</div>
-        </ion-item>
-        <ion-item lines="none" class="border-b-2 py-3 border-gray-300">
-            <img width="80px" slot="start" src="assets/images/shoe1.jpg" />
-            <div>
-                <div class="text-md text-gray-700">Canvas Shoe</div>
-                <div class="text-sm text-gray-500">RM 200</div>
-                <div class="status text-center text-xs text-white bg-orange-400 px-2">Processing</div>
-            </div>
-            <div slot="end" class="text-primary text-tiny">Edit</div>
-        </ion-item>
-        <ion-item lines="none" class="border-b-2 py-3 border-gray-300">
-            <img width="80px" slot="start" src="assets/images/shoe1.jpg" />
-            <div>
-                <div class="text-md text-gray-700">Canvas Shoe</div>
-                <div class="text-sm text-gray-500">RM 200</div>
-                <div class="status text-center text-xs text-white bg-green-400 px-2">Complete</div>
+                <div class="text-md text-gray-700">{{order.name}}</div>
+                <div class="text-sm text-gray-500">RM {{order.price}}</div>
+                <div [ngClass]="status[order.status]" class="status text-center text-xs text-white px-2">{{order.status}}</div>
             </div>
             <div slot="end" class="text-primary text-tiny">Edit</div>
         </ion-item>

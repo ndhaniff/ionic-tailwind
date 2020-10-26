@@ -14,6 +14,7 @@ export class OrderPage implements OnInit {
     bankref = ''
     cartId = ''
     loading = false
+    user
 
     constructor(
         private utils: UtilService,
@@ -24,6 +25,7 @@ export class OrderPage implements OnInit {
 
     ngOnInit() {
         this.cartId = this.router.snapshot.params.id
+        this.user = JSON.parse(localStorage['user'])
     }
 
     submit() {
@@ -35,7 +37,8 @@ export class OrderPage implements OnInit {
                 color: 'danger'
             })
         } else {
-            this.afs.collection('orders', ref => ref.where('cart_id', '==', this.cartId))
+            console.log(this.user)
+            this.afs.collection('orders', ref => ref.where('user_id', '==', this.user.uid))
                 .get()
                 .toPromise()
                 .then(query => {
@@ -47,8 +50,12 @@ export class OrderPage implements OnInit {
                             }
                         })
                     })
+                    this.afs.collection('carts', ref => ref.where('user_id', '==', this.user.uid))
+                        .get().toPromise().then(q => q.forEach(doc => {
+                            doc.ref.delete()
+                        }))
                     this.loading = false
-                    this.navCtrl.navigateRoot('/thankyou')
+                    this.navCtrl.navigateForward('/thankyou')
                 })
         }
     }

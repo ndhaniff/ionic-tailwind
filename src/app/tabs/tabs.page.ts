@@ -22,12 +22,7 @@ export class TabsPage implements OnInit {
 
     ionViewDidEnter() {
         this.$cartSubscription = this.cartSvc.state$.subscribe(val => {
-            let formatted = val.cart.filter((item, i, self) => {
-                return i === self.findIndex((it) => {
-                    return it.uid === item.uid
-                })
-            })
-            this.cartCount = formatted.length
+            this.cartCount = val.cart.length
         })
     }
 

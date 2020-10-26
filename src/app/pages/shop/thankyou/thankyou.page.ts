@@ -16,6 +16,6 @@ export class ThankyouPage implements OnInit {
     }
 
     gotohome() {
-        this.navCtrl.navigateRoot('/')
+        this.navCtrl.navigateBack('/')
     }
 }

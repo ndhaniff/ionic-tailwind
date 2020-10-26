@@ -25,6 +25,7 @@ export class CheckoutPage implements OnInit {
         price: 4.66
     }
     order
+    user
 
     constructor(
         private customerSvc: CustomerService,
@@ -40,7 +41,7 @@ export class CheckoutPage implements OnInit {
     }
 
     ngOnInit() {
-
+        this.user = JSON.parse(localStorage['user'])
     }
 
     async presentActionSheet() {
@@ -97,8 +98,7 @@ export class CheckoutPage implements OnInit {
                 cart = chain(cart).groupBy(p => p.seller.shop.name).value()
                 this.cartState = {
                     cart: Object.entries(cart),
-                    totals: cartState.totals,
-                    uid: cartState.cart[0].uid
+                    totals: cartState.totals
                 }
             })
     }
@@ -118,8 +118,8 @@ export class CheckoutPage implements OnInit {
                 await this.orderSvc.placeOrder({
                     ...prod,
                     seller_id: prod.seller.shop.user_uid,
-                    status: 'unpaid',
-                    cart_id: this.cartState.uid
+                    user_id: this.user.uid,
+                    status: 'unpaid'
                 })
             })
         })

@@ -11,6 +11,6 @@ export class ShopService {
     ) { }
 
     getShopByProductId(uid) {
-        this.afs.collection()
+        // this.afs.collection()
     }
 }

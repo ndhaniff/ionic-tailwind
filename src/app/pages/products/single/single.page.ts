@@ -19,7 +19,9 @@ export class SinglePage implements OnInit {
         slidesPerView: 3,
         spaceBetween: 10
     }
+    load: boolean = false
     public items: any = [];
+    productSubscription$
 
     constructor(
         private route: ActivatedRoute,
@@ -44,7 +46,7 @@ export class SinglePage implements OnInit {
 
     ngOnInit() {
         this.uid = this.route.snapshot.paramMap.get('id')
-        this.productSvc.getProduct(this.uid).subscribe(this.setProduct.bind(this))
+        this.productSubscription$ = this.productSvc.getProduct(this.uid).subscribe(this.setProduct.bind(this))
     }
 
     setProduct(prod) {
@@ -56,17 +58,22 @@ export class SinglePage implements OnInit {
         this.product.seller.shop = JSON.parse(this.product.seller.shop)
     }
 
-    addToCart() {
-        this.cartSvc.addCartItem({
+    async addToCart() {
+        this.load = true
+        await this.cartSvc.addCartItem({
             uid: this.uid,
             image: this.product.images[0],
             name: this.product.name,
             price: this.product.price
         })
+        this.load = false
     }
 
     selectImage(src) {
         this.productimg.nativeElement.src = src
     }
 
+    ngOnDestroy() {
+        this.productSubscription$.unsubscribe()
+    }
 }

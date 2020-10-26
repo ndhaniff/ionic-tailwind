@@ -87,6 +87,10 @@ const routes: Routes = [
     path: 'thankyou',
     loadChildren: () => import('./pages/shop/thankyou/thankyou.module').then( m => m.ThankyouPageModule)
   },
+  {
+    path: 'status',
+    loadChildren: () => import('./pages/products/status/status.module').then( m => m.StatusPageModule)
+  },
 
 
 
