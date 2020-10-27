@@ -8,6 +8,8 @@ const routes: Routes = [
         path: '',
         component: MorePage
     },
+
+
 ]
 
 @NgModule({

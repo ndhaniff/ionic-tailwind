@@ -14,7 +14,7 @@
             <div class="content w-full flex items-center justify-between">
                 <div  (click)="goToProduct(p.uid)">
                     <div class=" text-sm font-semibold">{{p.name}}</div>
-                    <div class="text-xs text-gray-500">RM {{p.price}}</div>
+                    <div class="text-xs text-gray-500 line-through">RM {{p.price}}</div>
                 </div>
                 <div class="flex items-center">
                     <div (click)="removeProduct(p, true)" *ngIf="p.count > 1" class="plus px-2 border">-</div>

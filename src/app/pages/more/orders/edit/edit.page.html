@@ -1,0 +1,39 @@
+<ion-header mode="ios">
+  <ion-toolbar>
+    <ion-title>Edit Order</ion-title>
+    <ion-buttons>
+        <ion-back-button slot="start" text=""></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div class="flex h-full flex-col justify-between" *ngIf="order">
+        <div class="content">
+            <div class="image">
+                <img [src]="order.images[0]" alt="">
+            </div>
+            <div class="flex justify-between p-3">Product Name: <span>{{order.name}}</span></div>
+            <div class="flex justify-between p-3">Sale Price <span>RM {{order.sale_price}}</span></div>
+            <div class="flex justify-between p-3">Price <div class="line-through text-gray-400">RM {{order.price}}</div></div>
+            <div class="flex justify-between p-3">Ordered by <div class="text-primary">{{username}}</div></div>
+            <div class="flex justify-between p-3">Status: <ion-select class="border" [(ngModel)]="status">
+                <ion-select-option value="shipped">Shipped</ion-select-option>
+                <!-- <ion-select-option value="cancel">Cancel</ion-select-option> -->
+                <ion-select-option value="paid">Paid</ion-select-option>
+                <ion-select-option value="unpaid">Unpaid</ion-select-option>
+                <ion-select-option value="complete">Complete</ion-select-option>
+                <ion-select-option value="done">Done</ion-select-option>
+                <!-- <ion-select-option value="processing">Processing</ion-select-option> -->
+            </ion-select></div>
+            
+            <div :class="'status == 'paid' ? border-green-500': 'border-yellow-500'" class="p-3 border rounded-lg mx-3" *ngIf="order.hasOwnProperty('payment')">
+                <div class="text-lg font-semibold">#PAID</div>
+                <div class="flex justify-between p-3">Bank name <span>{{order.payment.bankname}}</span></div>
+                <div class="flex justify-between p-3">Ref <span>{{order.payment.bankref}}</span></div>
+            </div>
+        </div>
+        
+        <ion-button class="m-3" expand="block" color="primary" (click)="save()">Save</ion-button>
+    </div>
+</ion-content>

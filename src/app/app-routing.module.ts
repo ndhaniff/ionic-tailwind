@@ -75,7 +75,16 @@ const routes: Routes = [
             {
                 path: 'profile',
                 loadChildren: () => import('@pages/more/profile/profile.module').then(m => m.ProfilePageModule)
-            }
+            },
+            {
+                path: 'mypurchase/:type',
+                loadChildren: () => import('@pages/more/mypurchase/mypurchase.module').then(m => m.MypurchasePageModule)
+            },
+
+            {
+                path: 'myshop',
+                loadChildren: () => import('@pages/more/myshop/myshop.module').then(m => m.MyshopPageModule)
+            },
         ]
     },
     {
@@ -83,14 +92,24 @@ const routes: Routes = [
         redirectTo: '/tabs/home',
         // redirectTo: 'products/single/1',
         pathMatch: 'full'
-    },  {
-    path: 'thankyou',
-    loadChildren: () => import('./pages/shop/thankyou/thankyou.module').then( m => m.ThankyouPageModule)
-  },
-  {
-    path: 'status',
-    loadChildren: () => import('./pages/products/status/status.module').then( m => m.StatusPageModule)
-  },
+    },
+    {
+        path: 'thankyou',
+        loadChildren: () => import('./pages/shop/thankyou/thankyou.module').then(m => m.ThankyouPageModule)
+    },
+    {
+        path: 'status',
+        loadChildren: () => import('./pages/products/status/status.module').then(m => m.StatusPageModule)
+    },
+    {
+        path: 'review',
+        loadChildren: () => import('./pages/products/review/review.module').then(m => m.ReviewPageModule)
+    },
+    {
+        path: 'pay',
+        loadChildren: () => import('./pages/products/pay/pay.module').then(m => m.PayPageModule)
+    },
+
 
 
 

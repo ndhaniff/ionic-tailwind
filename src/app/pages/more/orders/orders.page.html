@@ -1,9 +1,9 @@
 <ion-header mode="ios">
-    <ion-toolbar color="primary">
+    <ion-toolbar>
         <ion-buttons slot="start">
             <ion-back-button text=""></ion-back-button>
         </ion-buttons>
-        <ion-title class="text-xl">Track Orders</ion-title>
+        <ion-title>Track Orders</ion-title>
     </ion-toolbar>
 </ion-header>
 
@@ -13,14 +13,14 @@
             <span class="text-lg font-semibold text-gray-700">Total orders: {{orders.length}}</span>
         </ion-list-header>
         
-        <ion-item *ngFor="let order of orders" lines="none" class="border-b-2 py-3 border-gray-300">
-            <img width="80px" slot="start" src="assets/images/shoe1.jpg" />
+        <ion-item *ngFor="let order of orders.reverse()" lines="none" class="border-b-2 py-3 border-gray-300">
+            <img width="80px" slot="start" [src]="order.images[0]" />
             <div>
                 <div class="text-md text-gray-700">{{order.name}}</div>
                 <div class="text-sm text-gray-500">RM {{order.price}}</div>
                 <div [ngClass]="status[order.status]" class="status text-center text-xs text-white px-2">{{order.status}}</div>
             </div>
-            <div slot="end" class="text-primary text-tiny">Edit</div>
+            <div (click)="edit(order.order_id)" slot="end" class="text-primary text-tiny">Edit</div>
         </ion-item>
     </ion-list>
 </ion-content>

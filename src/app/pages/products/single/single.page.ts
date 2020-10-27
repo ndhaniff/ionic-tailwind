@@ -64,7 +64,7 @@ export class SinglePage implements OnInit {
             uid: this.uid,
             image: this.product.images[0],
             name: this.product.name,
-            price: this.product.price
+            price: this.product.sale_price
         })
         this.load = false
     }

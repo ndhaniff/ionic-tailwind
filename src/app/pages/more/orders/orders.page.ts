@@ -1,3 +1,4 @@
+import { NavController } from '@ionic/angular'
 import { AngularFirestore } from '@angular/fire/firestore'
 import { Component, OnInit } from '@angular/core'
 
@@ -11,13 +12,17 @@ export class OrdersPage implements OnInit {
     user
     orders
     status = {
-        'paid': 'bg-green-400',
+        'paid': 'bg-blue-400',
         'unpaid': 'bg-yellow-400',
-        'complete': 'bg-gray-500'
+        'complete': 'bg-green-500',
+        'shipped': 'bg-orange-500',
+        'cancel': 'bg-red-600',
+        'done': 'bg-teal-600',
     }
 
     constructor(
-        private afs: AngularFirestore
+        private afs: AngularFirestore,
+        private navCtrl: NavController
     ) { }
 
     ngOnInit() {
@@ -26,8 +31,12 @@ export class OrdersPage implements OnInit {
 
     ionViewDidEnter() {
         this.orderSubscription$ = this.afs.collection('orders', ref => ref.where('seller_id', '==', this.user.uid))
-            .valueChanges()
+            .valueChanges({ idField: 'order_id' })
             .subscribe(val => this.orders = val)
+    }
+
+    edit(uid) {
+        this.navCtrl.navigateForward('/account/orders/edit/' + uid)
     }
 
 }
