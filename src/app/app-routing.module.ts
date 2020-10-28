@@ -82,7 +82,7 @@ const routes: Routes = [
             },
 
             {
-                path: 'myshop',
+                path: 'myshop/:id',
                 loadChildren: () => import('@pages/more/myshop/myshop.module').then(m => m.MyshopPageModule)
             },
         ]

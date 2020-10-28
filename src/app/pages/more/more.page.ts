@@ -50,6 +50,10 @@ export class MorePage implements OnInit {
     goTo(route) {
         this.navCtrl.navigateForward('/account' + route)
     }
+
+    goToMyShop() {
+        this.navCtrl.navigateForward('/account/myshop/' + this.user.uid)
+    }
     signIn() {
         this.navCtrl.navigateForward('/login')
     }

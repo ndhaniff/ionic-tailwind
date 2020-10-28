@@ -3,10 +3,25 @@
         <ion-buttons slot="start">
             <ion-back-button text=""></ion-back-button>
         </ion-buttons>
-        <ion-title>sales</ion-title>
+        <ion-title>Sales</ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content>
+    <canvas #myChart width="400" height="200"></canvas>
+    <ng-container *ngIf="products; else spinner">
 
+        <div class="p-4">
+            <div class="flex items-center">
+                <div class="text-xl font-semibold mr-3">Total Sales: </div><div class="text-4xl font-bold text-primary">RM {{totalSale}}</div>
+            </div>
+            Product sold: {{products.length}} products
+        </div>
+    </ng-container>
+
+    <ng-template #spinner>
+        <div class="p-4 text-center">
+            <ion-spinner name="crescent"></ion-spinner>
+        </div>
+    </ng-template>
 </ion-content>

@@ -59,7 +59,7 @@
             </div>
 
             <div *ngIf="user.is_seller" class="py-2 border-b-4 border-gray-300 bg-white">
-                <ion-item lines="none">
+                <ion-item (click)="goToMyShop()" lines="none">
                     <ion-icon slot="start" name="pricetag-outline"></ion-icon>
                     <ion-label>My Shop</ion-label>
                     <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>

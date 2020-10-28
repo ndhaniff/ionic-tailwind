@@ -1,9 +1,37 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>myshop</ion-title>
+  <ion-toolbar mode="ios">
+    <ion-title>My Shop</ion-title>
+    <ion-buttons>
+        <ion-back-button text="" slot="start"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+    <div class="p-4 bg-gray-500">
+        <ng-container *ngIf="seller">
+            <ion-avatar class="mx-auto" size="large">
+                <ion-img
+                    src="{{ seller.shop.avatar ? seller.shop.avatar : 'assets/images/avatar.png' }}">
+                </ion-img>
+            </ion-avatar>
+    
+            <div class="text-center p-4">
+                <div>{{ seller.shop.name }}</div>
+                <small>Date Joined:{{seller.created_at}}</small>
+            </div>
+        </ng-container>
+    </div>
+    <div *ngIf="myshopproducts; else spinner" class="p-4">
+        <div class="grid grid-cols-2 gap-3">
+            <div *ngFor="let p of myshopproducts">
+                <app-productcard (click)="goToProduct(p.uid)" [product]="p"></app-productcard>
+            </div>
+        </div>
+    </div>
+    <ng-template #spinner>
+        <div  class="p-4 text-center">
+            <ion-spinner name="crescent" class="mx-auto"></ion-spinner>
+        </div>
+    </ng-template>
 </ion-content>
