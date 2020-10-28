@@ -2,6 +2,7 @@ import { CameraService } from './../../services/camera.service'
 import { AuthService } from '@services/auth.service'
 import { NavController } from '@ionic/angular'
 import { Component, OnInit } from '@angular/core'
+import { AnalyticsService } from '@services/analytics.service'
 
 @Component({
     selector: 'app-more',
@@ -10,11 +11,12 @@ import { Component, OnInit } from '@angular/core'
 })
 export class MorePage implements OnInit {
     avatar: any
-
+    mypurchase
     constructor(
         private navCtrl: NavController,
         public auth: AuthService,
-        private camera: CameraService
+        private camera: CameraService,
+        private analytics: AnalyticsService
     ) { }
 
     get isLoggedin() {
@@ -43,8 +45,15 @@ export class MorePage implements OnInit {
     }
 
     ionViewDidEnter() {
-        console.log('run')
         this.loadAvatar()
+        if (localStorage['mypurchase']) {
+            this.mypurchase = JSON.parse(localStorage['mypurchase'])
+        }
+        this.analytics.getMyPurchaseCount()
+            .then(data => {
+                localStorage['mypurchase'] = JSON.stringify(data)
+                this.mypurchase = data
+            })
     }
 
     goTo(route) {

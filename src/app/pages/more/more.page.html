@@ -37,22 +37,26 @@
                 <div style="border-bottom:solid 1px" class="w-full border-gray-300"></div>
                 <div class="px-6">
 
-                    <div class="tabs py-4 grid grid-cols-4 gap-3">
-                        <div (click)="goTo('/mypurchase/topay')" class="flex flex-col items-center">
+                    <div *ngIf="mypurchase" class="tabs py-4 grid grid-cols-4 gap-3">
+                        <div (click)="goTo('/mypurchase/topay')" class="flex relative flex-col items-center">
                             <ion-icon size="large" class="text-gray-600" name="wallet-outline"></ion-icon>
                             <div class="text-xs text-gray-600">To Pay</div>
+                            <div class="top-0 right-0 absolute px-2 text-xs bg-primary text-white rounded-full">{{mypurchase.unpaid}}</div>
                         </div>
-                        <div class="flex flex-col items-center">
+                        <div class="flex flex-col relative items-center">
                             <ion-icon size="large" class="text-gray-600" name="car-outline"></ion-icon>
                             <div class="text-xs text-gray-600">To Ship</div>
+                            <div class="top-0 right-0 absolute px-2 text-xs bg-primary text-white rounded-full">{{mypurchase.paid}}</div>
                         </div>
-                        <div class="flex flex-col items-center">
+                        <div class="flex flex-col relative items-center">
                             <ion-icon size="large" class="text-gray-600" name="cube-outline"></ion-icon>
                             <div class="text-xs text-gray-600">To Receive</div>
+                            <div class="top-0 right-0 absolute px-2 text-xs bg-primary text-white rounded-full">{{mypurchase.shipped}}</div>
                         </div>
-                        <div class="flex flex-col items-center">
+                        <div class="flex flex-col relative items-center">
                             <ion-icon size="large" class="text-gray-600" name="star-outline"></ion-icon>
                             <div class="text-xs text-gray-600">To Rate</div>
+                            <div class="top-0 right-0 absolute px-2 text-xs bg-primary text-white rounded-full">{{mypurchase.complete}}</div>
                         </div>
                     </div>
                 </div>
