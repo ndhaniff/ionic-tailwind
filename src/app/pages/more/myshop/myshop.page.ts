@@ -45,4 +45,8 @@ export class MyshopPage implements OnInit {
         this.navCtrl.navigateForward('products/single/' + uid)
     }
 
+    edit() {
+        this.navCtrl.navigateForward('/account/myshopedit')
+    }
+
 }

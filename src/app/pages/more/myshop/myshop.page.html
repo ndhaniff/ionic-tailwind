@@ -8,17 +8,25 @@
 </ion-header>
 
 <ion-content>
-    <div class="p-4 bg-gray-500">
+    <div class="p-4" style="
+        background-image: url('https://images.unsplash.com/photo-1539923779676-1a9bddf986db?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80');
+        background-size:cover;
+        background-repeat: no-repeat;
+        background-position:center center;
+    ">
         <ng-container *ngIf="seller">
-            <ion-avatar class="mx-auto" size="large">
-                <ion-img
-                    src="{{ seller.shop.avatar ? seller.shop.avatar : 'assets/images/avatar.png' }}">
-                </ion-img>
-            </ion-avatar>
-    
-            <div class="text-center p-4">
-                <div>{{ seller.shop.name }}</div>
-                <small>Date Joined:{{seller.created_at}}</small>
+            <div class="relative">
+                <ion-avatar class="mx-auto" size="large">
+                    <ion-img
+                        src="{{ seller.shop.avatar ? seller.shop.avatar : 'assets/images/avatar.png' }}">
+                    </ion-img>
+                </ion-avatar>
+        
+                <div class="text-center rounded-lg shadow-md mt-3 relative p-4">
+                    <ion-icon (click)="edit()" class="absolute" style="top:15px;right:35%"  color="light" size="medium" name="create-outline"></ion-icon>
+                    <div class="text-gray-500">{{ seller.shop.name }} </div>
+                    <small class="text-xs text-white">Date Joined:{{seller.created_at}}</small>
+                </div>
             </div>
         </ng-container>
     </div>

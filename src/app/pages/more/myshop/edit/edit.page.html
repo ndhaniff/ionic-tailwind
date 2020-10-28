@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-title>Edit Shop</ion-title>
+    <ion-buttons>
+        <ion-back-button text="" slot="start"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div class="flex flex-col h-full justify-between">
+        <div *ngIf="detail">
+            <div class="profile-banner p-6 text-center border-b-4 border-gray-300">
+                <ion-avatar (click)="openCamera()" class="mx-auto" size="large">
+                    <img class="object-cover h-full" #avatarimg
+                        [src]="detail.shop.avatar ? sanitize(detail.shop.avatar) : '/assets/images/avatar.png'" alt="" />
+                </ion-avatar>
+        
+                <div class="text-center w-2/3 mx-auto">
+                    <div>Shop Avatar</div>
+                </div>
+            </div>
+        
+            <div *ngIf="editForm" class="p-4">
+                <form [formGroup]="editForm">
+                    <div class="grid grid-cols-3">
+                        <div class="col-span-1">
+                            Shop Name
+                        </div>
+                        <div class="col-span-2">
+                            <div class="input__wrapper mb-4 text-left">
+                                <ion-input [ngClass]="errorBorder('name', 'required')" formControlName="name"
+                                    class="px-2 bg-gray-200" type="text" placeholder="Shop Name">
+                                </ion-input>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <ion-button (click)="saveProfile()" expand="block" class="m-4" color="primary">Save</ion-button>
+    </div>
+
+
+</ion-content>

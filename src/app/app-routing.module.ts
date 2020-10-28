@@ -85,6 +85,11 @@ const routes: Routes = [
                 path: 'myshop/:id',
                 loadChildren: () => import('@pages/more/myshop/myshop.module').then(m => m.MyshopPageModule)
             },
+
+            {
+                path: 'myshopedit',
+                loadChildren: () => import('@pages/more/myshop/edit/edit.module').then(m => m.EditPageModule)
+            }
         ]
     },
     {
