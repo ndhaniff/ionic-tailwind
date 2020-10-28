@@ -107,11 +107,11 @@ const routes: Routes = [
         loadChildren: () => import('./pages/products/status/status.module').then(m => m.StatusPageModule)
     },
     {
-        path: 'review',
+        path: 'review/:id',
         loadChildren: () => import('./pages/products/review/review.module').then(m => m.ReviewPageModule)
     },
     {
-        path: 'pay',
+        path: 'pay/:id',
         loadChildren: () => import('./pages/products/pay/pay.module').then(m => m.PayPageModule)
     },
 

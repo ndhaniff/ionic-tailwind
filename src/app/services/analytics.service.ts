@@ -10,6 +10,14 @@ export class AnalyticsService {
         private afs: AngularFirestore
     ) { }
 
+    async getPaidOrders(uid) {
+        let ordersRef = this.afs.collection('orders')
+        let q = ordersRef.ref.where('seller_id', '==', uid)
+        let paid = await q.where('status', '==', 'paid').get()
+        let paidData = paid.docs.map(doc => doc.data())
+        return paidData.length
+    }
+
     async getMyPurchaseCount() {
         let ordersRef = this.afs.collection('orders')
         let userId = JSON.parse(localStorage['user']).uid

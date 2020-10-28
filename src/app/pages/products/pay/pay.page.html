@@ -1,9 +1,24 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>pay</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-
-</ion-content>
+<ion-header mode="ios">
+    <ion-toolbar>
+      <ion-title>Make Payment</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+      <div class="wrapper p-4">
+          <div class="text-sm font-bold py-4 border-b">Bank Transfer</div>
+          <div class="py-4">
+              Bank Name: 
+              <ion-input  [(ngModel)]="bankname" class="border-b" type="text" placeholder="Bank name eg: CIMB"></ion-input>
+          </div>
+          <div class="py-4">
+              Reference no: 
+              <ion-input [(ngModel)]="bankref" class="border-b" type="text" placeholder="Bank reference no eg: 11x223"></ion-input>
+          </div>
+      </div>
+  
+      <div (click)="submit()" class="fixed bottom-0 left-0 w-full p-4">
+          <ion-button [disabled]="loading" expand="block" color="primary">Submit</ion-button>
+      </div>
+  </ion-content>
+  

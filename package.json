@@ -39,6 +39,7 @@
     "es6-promise-plugin": "^4.2.2",
     "firebase": "^7.22.0",
     "fuzzy-search": "^3.2.1",
+    "ionic5-star-rating": "https://github.com/JeongJun-Lee/ionic5-star-rating/tarball/master",
     "lodash": "^4.17.20",
     "moment": "^2.29.1",
     "remixicon": "^2.5.0",

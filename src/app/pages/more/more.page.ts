@@ -12,6 +12,7 @@ import { AnalyticsService } from '@services/analytics.service'
 export class MorePage implements OnInit {
     avatar: any
     mypurchase
+    mypaidorders
     constructor(
         private navCtrl: NavController,
         public auth: AuthService,
@@ -49,10 +50,31 @@ export class MorePage implements OnInit {
         if (localStorage['mypurchase']) {
             this.mypurchase = JSON.parse(localStorage['mypurchase'])
         }
+        this.getMyPurchase()
+        if (this.user.is_seller) {
+            if (localStorage['mypaidorders']) {
+                this.mypaidorders = JSON.parse(localStorage['mypaidorders'])
+            }
+            this.getPaidOrders()
+        }
+    }
+
+    getMyPurchase(ev = null) {
         this.analytics.getMyPurchaseCount()
             .then(data => {
                 localStorage['mypurchase'] = JSON.stringify(data)
                 this.mypurchase = data
+                if (ev) {
+                    ev.target.complete()
+                }
+            })
+    }
+
+    getPaidOrders() {
+        this.analytics.getPaidOrders(this.user.uid)
+            .then(data => {
+                localStorage['mypaidorders'] = JSON.stringify(data)
+                this.mypaidorders = data
             })
     }
 

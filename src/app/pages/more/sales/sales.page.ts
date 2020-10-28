@@ -53,10 +53,8 @@ export class SalesPage implements OnInit {
 
     ionViewDidEnter() {
         let userId = JSON.parse(localStorage['user']).uid
-        let q: any = this.afs.collection('orders')
-        q.ref
-            .where('seller_id', '==', userId)
-            .where('status', '==', 'complete')
+        let q: any = this.afs.collection('orders').ref.where('seller_id', '==', userId)
+        q.where('status', 'in', ['complete', 'done'])
             .get()
             .then(query => {
                 this.products = query.docs.map(ref => ref.data())

@@ -1,9 +1,31 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>review</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-header mode="ios">
+    <ion-toolbar>
+        <ion-buttons>
+            <ion-back-button slot="start" text=""></ion-back-button>
+        </ion-buttons>
+      <ion-title>Rate A Product</ion-title>
+    </ion-toolbar>
+  </ion-header>
 
 <ion-content>
+    <div class="p-4">
+        <ionic5-star-rating #rating
+            activeIcon = "star"
+            defaultIcon = "star"
+            activeColor = "#DAA520" 
+            defaultColor = "#ddd"
+            readonly="false"
+            rating="5"
+            fontSize = "25px"
+            (ratingChanged)="onRatingChange($event)"
+        >
+        </ionic5-star-rating>
 
+        <form>
+            <ion-textarea [(ngModel)]="message" name="message" class="rounded-lg border p-2" cols="2" rows="3" placeholder="Say something"></ion-textarea>
+            <div class="text-right px-3">
+                <ion-button (click)="submit()" color="primary">Submit</ion-button>
+            </div>
+        </form>
+    </div>
 </ion-content>

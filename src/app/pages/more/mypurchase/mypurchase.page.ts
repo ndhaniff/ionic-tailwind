@@ -1,5 +1,6 @@
+import { ActivatedRoute } from '@angular/router'
 import { AngularFirestore } from '@angular/fire/firestore'
-import { IonSlides } from '@ionic/angular'
+import { IonSlides, NavController } from '@ionic/angular'
 import { Subject, merge } from 'rxjs'
 import { Component, OnInit, ViewChild } from '@angular/core'
 import { SwiperOptions } from 'swiper'
@@ -46,13 +47,17 @@ export class MypurchasePage implements OnInit {
     done
 
     constructor(
-        private afs: AngularFirestore
+        private afs: AngularFirestore,
+        private navCtrl: NavController,
+        private router: ActivatedRoute
     ) { }
 
     ngOnInit() {
+
     }
 
     async ionViewDidEnter() {
+        this.sliderContent.slideTo(parseInt(this.router.snapshot.params.type))
         let ordersRef = this.afs.collection('orders')
         let userId = JSON.parse(localStorage['user']).uid
         let q = ordersRef.ref.where('user_id', '==', userId)
@@ -61,18 +66,34 @@ export class MypurchasePage implements OnInit {
         let shipped = await q.where('status', '==', 'shipped').get()
         let complete = await q.where('status', '==', 'complete').get()
         let done = await q.where('status', '==', 'done').get()
-
-        this.unpaid = unpaid.docs.map(doc => doc.data())
-        this.paid = paid.docs.map(doc => doc.data())
-        this.shipped = shipped.docs.map(doc => doc.data())
-        this.complete = complete.docs.map(doc => doc.data())
-        this.done = done.docs.map(doc => doc.data())
+        const callback = doc => {
+            return {
+                id: doc.id,
+                ...doc.data()
+            }
+        }
+        this.unpaid = unpaid.docs.map(callback)
+        this.paid = paid.docs.map(callback)
+        this.shipped = shipped.docs.map(callback)
+        this.complete = complete.docs.map(callback)
+        this.done = done.docs.map(callback)
     }
 
     async contentSlideChange() {
         let index = await this.sliderContent.getActiveIndex()
         this.slideChange$.next({
             index
+        })
+    }
+
+    pay(uid) {
+        this.navCtrl.navigateForward('/pay/' + uid)
+    }
+    rate(uid, orderId) {
+        this.navCtrl.navigateForward(['/review/' + uid], {
+            queryParams: {
+                orderId
+            }
         })
     }
 

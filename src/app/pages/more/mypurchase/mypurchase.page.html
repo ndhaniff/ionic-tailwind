@@ -3,7 +3,7 @@
       <ion-buttons>
           <ion-back-button slot="start" text=""></ion-back-button>
       </ion-buttons>
-    <ion-title>mypurchase</ion-title>
+    <ion-title>My Purchase</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,69 +13,98 @@
     <ion-slides mode="ios" #sliderContent (ionSlideDidChange)="contentSlideChange()"
     [options]="catSliderContentOpt">
         <ion-slide>
-            <div class="w-full p-4" *ngIf="unpaid">
-                <ion-item *ngFor="let p of unpaid.reverse()" lines="none">
+            <div class="w-full p-4" *ngIf="unpaid; else spinner">
+                <ion-item class="mb-3" *ngFor="let p of unpaid.reverse()" lines="none">
                     <img style="width:100px" slot="start" [src]="p.images[0]" alt="">
                     <div class="content">
-                        <div class="font-semibold">{{p.name}}</div>
+                        <div class="font-semibold text-sm">{{p.name}}</div>
                         <div class="text-gray-500">RM {{p.price}}</div>
                         <div class="text-primary">Seller: {{p.seller.shop.name}}</div>
                     </div>
-                    <div slot="end" class=" text-primary">Pay</div>
+                    <div slot="end" (click)="pay(p.id)" class=" text-primary">Pay</div>
                 </ion-item>
             </div>
+            <ng-template #spinner>
+                <div class="text-center p-4">
+                    <ion-spinner name="crescent"></ion-spinner>
+                </div>
+            </ng-template>
         </ion-slide>
         <ion-slide>
-            <div class="w-full p-4" *ngIf="paid">
-                <ion-item *ngFor="let p of paid.reverse()" lines="none">
+            <div class="w-full p-4" *ngIf="paid; else spinner">
+                <ion-item class="mb-3" *ngFor="let p of paid.reverse()" lines="none">
                     <img style="width:100px" slot="start" [src]="p.images[0]" alt="">
                     <div class="content">
-                        <div class="font-semibold">{{p.name}}</div>
+                        <div class="font-semibold text-sm">{{p.name}}</div>
                         <div class="text-gray-500">RM {{p.price}}</div>
                         <div class="text-primary">Seller: {{p.seller.shop.name}}</div>
                         <div class="text-xs text-orange-400">Items is packed</div>
                     </div>
                 </ion-item>
             </div>
+            
+            <ng-template #spinner>
+                <div class="text-center p-4">
+                    <ion-spinner name="crescent"></ion-spinner>
+                </div>
+            </ng-template>
         </ion-slide>
         <ion-slide>
-            <div class="w-full p-4" *ngIf="shipped">
-                <ion-item *ngFor="let p of shipped.reverse()" lines="none">
+            <div class="w-full p-4" *ngIf="shipped; else spinner">
+                <ion-item class="mb-3" *ngFor="let p of shipped.reverse()" lines="none">
                     <img style="width:100px" slot="start" [src]="p.images[0]" alt="">
                     <div class="content">
-                        <div class="font-semibold">{{p.name}}</div>
+                        <div class="font-semibold text-sm">{{p.name}}</div>
                         <div class="text-gray-500">RM {{p.price}}</div>
                         <div class="text-primary">Seller: {{p.seller.shop.name}}</div>
                         <div class="text-xs text-green-600">Items out for delivery</div>
                     </div>
                 </ion-item>
             </div>
+            
+            <ng-template #spinner>
+                <div class="text-center p-4">
+                    <ion-spinner name="crescent"></ion-spinner>
+                </div>
+            </ng-template>
         </ion-slide>
         <ion-slide>
-            <div class="w-full p-4" *ngIf="complete">
-                <ion-item *ngFor="let p of complete.reverse()" lines="none">
+            <div class="w-full p-4" *ngIf="complete; else spinner">
+                <ion-item class="mb-3" *ngFor="let p of complete.reverse()" lines="none">
                     <img style="width:100px" slot="start" [src]="p.images[0]" alt="">
                     <div class="content">
-                        <div class="font-semibold">{{p.name}}</div>
+                        <div class="font-semibold text-sm">{{p.name}}</div>
                         <div class="text-gray-500">RM {{p.price}}</div>
                         <div class="text-primary">Seller: {{p.seller.shop.name}}</div>
                         <div class="text-xs text-teal-600">Item received</div>
                     </div>
-                    <div slot="end" class=" text-primary">Rate</div>
+                    <div slot="end" (click)="rate(p.uid, p.id)" class=" text-primary">Rate</div>
                 </ion-item>
             </div>
+            
+            <ng-template #spinner>
+                <div class="text-center p-4">
+                    <ion-spinner name="crescent"></ion-spinner>
+                </div>
+            </ng-template>
         </ion-slide>
         <ion-slide>
-            <div class="w-full p-4" *ngIf="done">
-                <ion-item *ngFor="let p of done.reverse()" lines="none">
+            <div class="w-full p-4" *ngIf="done; else spinner">
+                <ion-item class="mb-3" *ngFor="let p of done.reverse()" lines="none">
                     <img style="width:100px" slot="start" [src]="p.images[0]" alt="">
                     <div class="content">
-                        <div class="font-semibold">{{p.name}}</div>
+                        <div class="font-semibold text-sm">{{p.name}}</div>
                         <div class="text-gray-500">RM {{p.price}}</div>
                         <div class="text-primary">Seller: {{p.seller.shop.name}}</div>
                     </div>
                 </ion-item>
             </div>
+            
+            <ng-template #spinner>
+                <div class="text-center p-4">
+                    <ion-spinner name="crescent"></ion-spinner>
+                </div>
+            </ng-template>
         </ion-slide>
     </ion-slides>
 </ion-content>
