@@ -109,13 +109,14 @@ export class AddPage implements OnInit {
 
     createProduct() {
         const { sub_category, category, tags, ...rest } = this.addproductform.value
+        console.log(this.addproductform.value)
         let seller = JSON.parse(localStorage['seller'])
         let productData: Product = {
             ...rest,
             tags: tags.join(),
             category: {
-                name: this.categories.find(c => c.uid = category).name,
-                subcategory: this.subcategory.find(c => c.uid = sub_category).name
+                name: this.categories.find(c => c.uid === category).name,
+                subcategory: this.subcategory.find(c => c.uid === sub_category).name
             },
             images: this.uploadedImages,
             seller,

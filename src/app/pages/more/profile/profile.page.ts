@@ -34,7 +34,17 @@ export class ProfilePage implements OnInit {
 
     ngOnInit() {
         this.customerSvc.getCustomerDetails$(this.user.uid)
-            .subscribe((data: any) => this.detail = data)
+            .subscribe((data: any) => {
+                if (!data) {
+                    this.detail = {
+                        address: null,
+                        payment_type: null,
+                        created_at: null
+                    }
+                } else {
+                    this.detail = data
+                }
+            })
         this.loadAvatar()
     }
 

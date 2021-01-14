@@ -51,7 +51,7 @@ export class MorePage implements OnInit {
             this.mypurchase = JSON.parse(localStorage['mypurchase'])
         }
         this.getMyPurchase()
-        if (this.user.is_seller) {
+        if (this.user && this.user.is_seller) {
             if (localStorage['mypaidorders']) {
                 this.mypaidorders = JSON.parse(localStorage['mypaidorders'])
             }

@@ -14,7 +14,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core'
 export class EditPage implements OnInit {
 
     editForm: FormGroup
-    avatarSrc: any
+    avatarSrc: any = ''
     detail: any
     @ViewChild('avatarimg') avatarImg: ElementRef
 

@@ -44,9 +44,13 @@ export class CartService {
     ) { }
 
     private get productsInCart(): any {
-        let userId = JSON.parse(localStorage['user']).uid
-        // get data from firebase
-        return this.afs.collection('carts', ref => ref.where('user_id', '==', userId)).valueChanges({ idField: 'cartItemId' })
+        if (localStorage['user']) {
+            return new Observable(null)
+        } else {
+            let user = JSON.parse(localStorage['user'])
+            let userId = user.uid
+            return this.afs.collection('carts', ref => ref.where('user_id', '==', userId)).valueChanges({ idField: 'cartItemId' })
+        }
     }
 
     async addToCart(product, single = false) {

@@ -1,3 +1,4 @@
+import { ThankyouPageRoutingModule } from './../pages/shop/thankyou/thankyou-routing.module'
 import { StorageService } from './storage.service'
 import { AngularFirestoreDocument, AngularFirestore } from '@angular/fire/firestore'
 import { User } from './../interfaces/user'
@@ -71,6 +72,18 @@ export class AuthService {
             created_at: moment().format('DD/MM/YYYY')
         }
         localStorage['user'] = JSON.stringify(userData)
+
+        // add seller
+        if (extra.is_seller) {
+            let seller = this.afs.doc(`sellers/${user.uid}`).set({
+                created_at: (new Date()).toLocaleDateString('en-US'),
+                shop: JSON.stringify({
+                    name: `${user.name} Shop`,
+                    avatar: '',
+                    user_uid: user.uid
+                })
+            }, { merge: true })
+        }
 
         // add initial customer
         let customer = this.afs.doc(`customers/${user.uid}`)

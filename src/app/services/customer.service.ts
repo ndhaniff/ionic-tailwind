@@ -3,7 +3,7 @@ import { UtilService } from './util.service'
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore'
 import { Injectable } from '@angular/core'
 import { map, mergeMap, switchMap } from 'rxjs/operators'
-import { combineLatest, of } from 'rxjs'
+import { combineLatest, of, Observable } from 'rxjs'
 
 export interface Customer {
     uid: string,
@@ -78,7 +78,10 @@ export class CustomerService {
         return customers.pipe(
             switchMap((customer: any) => {
                 let address, shipping_address
-
+                console.log(customer)
+                if (!customer) {
+                    return of(null)
+                }
                 address = this.afs.doc(`addresses/${customer.address_id}`)
                     .valueChanges()
                 shipping_address = this.afs.doc(`addresses/${customer.shipping_address_id}`)

@@ -35,6 +35,9 @@ export class HomePage implements OnInit {
             name: 'Clothes'
         },
         {
+            name: 'Food'
+        },
+        {
             name: 'Shoes'
         },
         {
@@ -49,56 +52,10 @@ export class HomePage implements OnInit {
     clothes: any = []
     shoes: any = []
     bag: any = []
+    food: any = []
     watches: any = []
     trending: any = []
     newArrivals: any = []
-
-    // // replace this
-    // get clothing() {
-    //     let clothing = this.products.filter(product => product.category.name === 'clothing')
-    //     return {
-    //         newarrival: clothing.filter(product => product.tag.split(',').includes('newarrival')).slice(0, 4),
-    //         trending: clothing.filter(product => product.tag.split(',').includes('trending')).slice(0, 4)
-    //     }
-    // }
-
-    // // replace this
-    // get shoes() {
-    //     let shoes = this.products.filter(product => product.category.name === 'shoes')
-
-    //     return {
-    //         newarrival: shoes.filter(product => product.tag.split(',').includes('newarrival')).slice(0, 4),
-    //         trending: shoes.filter(product => product.tag.split(',').includes('trending')).slice(0, 4)
-    //     }
-    // }
-
-    // // replace this
-    // get bag() {
-    //     let bag = this.products.filter(product => product.category.name === 'bag')
-
-    //     return {
-    //         newarrival: bag.filter(product => product.tag.split(',').includes('newarrival')).slice(0, 4),
-    //         trending: bag.filter(product => product.tag.split(',').includes('trending')).slice(0, 4)
-    //     }
-    // }
-
-    // // replace this
-    // get watches() {
-    //     let watches = this.products.filter(product => product.category.name === 'watches')
-
-    //     return {
-    //         newarrival: watches.filter(product => product.tag.split(',').includes('newarrival')).slice(0, 4),
-    //         trending: watches.filter(product => product.tag.split(',').includes('trending')).slice(0, 4)
-    //     }
-    // }
-
-    // get trending() {
-    //     return this.products.filter(product => product.tag.split(',').includes('trending')).slice(0, 4)
-    // }
-
-    // get newArrivals() {
-    //     return this.products.filter(product => product.tag.split(',').includes('newarrival')).slice(0, 4)
-    // }
 
     constructor(
         private navCtrl: NavController,
@@ -122,10 +79,11 @@ export class HomePage implements OnInit {
 
     formatProducts(prod) {
         this.products = prod
-        this.clothes = this.filterProduct(prod, 'clothes')
-        this.shoes = this.filterProduct(prod, 'shoes')
-        this.bag = this.filterProduct(prod, 'bag')
-        this.watches = this.filterProduct(prod, 'watches')
+        this.clothes = this.filterProduct(prod, 'Clothes')
+        this.food = this.filterProduct(prod, 'Food')
+        this.shoes = this.filterProduct(prod, 'Shoes')
+        this.bag = this.filterProduct(prod, 'Bag')
+        this.watches = this.filterProduct(prod, 'Watches')
         this.trending = prod.filter(product => product.tags.split(',').includes('trending')).slice(0, 4)
         this.newArrivals = prod.filter(product => product.tags.split(',').includes('newarrival')).slice(0, 4)
         this.loading = false
