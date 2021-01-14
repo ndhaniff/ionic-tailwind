@@ -54,6 +54,13 @@ export class CartService {
     }
 
     async addToCart(product, single = false) {
+        if (!localStorage['user']) {
+            await this.util.presentToast('Please Login', {
+                position: 'top',
+                color: 'danger'
+            })
+            throw Error('error')
+        }
         let userId = JSON.parse(localStorage['user']).uid
         await this.afs.collection(`carts`).add({
             user_id: userId,
@@ -113,13 +120,25 @@ export class CartService {
                     }
                     return [...acc, item]
                 }
+            }, []),
+            tap((item) => {
+                console.log(item)
             })
         )
+    }
+
+    isIterable(obj) {
+        // checks for null and undefined
+        if (obj == null) {
+            return false
+        }
+        return typeof obj[Symbol.iterator] === 'function'
     }
 
     private get total$(): any {
         return this.cart$.pipe(
             map((items: any) => {
+                console.log(items)
                 let total = 0
                 for (const i of items) {
                     total += i.price

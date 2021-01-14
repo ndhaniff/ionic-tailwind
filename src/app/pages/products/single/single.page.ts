@@ -59,14 +59,19 @@ export class SinglePage implements OnInit {
     }
 
     async addToCart() {
-        this.load = true
-        await this.cartSvc.addCartItem({
-            uid: this.uid,
-            image: this.product.images[0],
-            name: this.product.name,
-            price: this.product.sale_price
-        })
-        this.load = false
+        try {
+            this.load = true
+            await this.cartSvc.addCartItem({
+                uid: this.uid,
+                image: this.product.images[0],
+                name: this.product.name,
+                price: this.product.sale_price
+            }, true)
+            this.load = false
+        } catch (error) {
+            console.log(error.toString())
+            this.load = false
+        }
     }
 
     selectImage(src) {
